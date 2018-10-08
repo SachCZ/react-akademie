@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import MyList from "./MyList";
 
 class App extends Component {
   render() {
@@ -11,6 +12,8 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
+          <MyList texts={["Martin", "Filip", "Zdenek"]} />
+          <MyList texts={["Honda", "Audi", "BMW"]} />
           <a
             className="App-link"
             href="https://reactjs.org"
