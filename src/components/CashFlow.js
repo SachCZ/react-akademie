@@ -1,13 +1,15 @@
 import Transaction from "./Transaction"
 import data from "../data.json"
 import React from "react";
+import "./CashFlow.css"
 
 export default () => {
-  return data.map((transaction) =>{
-    return <Transaction name={transaction.name}
-                        type={transaction.type}
-                        value={transaction.value}
-                        created={transaction.created}
-                        id={transaction.id} />
+  const transactions = data.map((transaction) =>{
+    return <Transaction transaction={transaction} />
   });
+
+  return <div className="cash_flow">
+    <h2>Všechny transakce:</h2>
+    <div>{transactions}</div>
+  </div>
 }

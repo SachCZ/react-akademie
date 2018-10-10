@@ -1,8 +1,9 @@
 import React from "react"
+import "./Transaction.css"
 
-export default ({name, type, value, created, id}) => (
+export default ({transaction: {name, type, value, created, id}}) => (
   <div>
-    <div>{name}</div>
+    <div className="transaction_name">{name}</div>
     <div>{type}</div>
     <div>{value}</div>
     <div>{created}</div>
