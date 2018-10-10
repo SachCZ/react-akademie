@@ -1,9 +1,0 @@
-#wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-CashFlow {
-    max-width: 500px;
-}
