@@ -1,8 +1,9 @@
 import React from "react";
 import CashFlow from "../components/CashFlow"
+import "./App.css"
 
 const App = () => (
-  <div>
+  <div id="wrapper">
     <CashFlow/>
   </div>
 );
