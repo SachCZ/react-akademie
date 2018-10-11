@@ -6,6 +6,7 @@ import styled from "styled-components"
 injectGlobal`
   * {
     font-family: Helvetica;
+    font-size: 1em;
   }
   body {
     margin: 0;

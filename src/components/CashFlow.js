@@ -5,21 +5,22 @@ import styled from "styled-components"
 import Spacer from "./Spacer"
 import Button from "./Button";
 import constants from "../Constants"
+import ExpansionPanel from "./ExpansionPanel";
 
 const TransactionsPageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-top: 20px;
-`;
-const TransactionsWrapper = styled.div`
-
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 const Sidebar = styled.div`
     display: flex;
     flex-direction: column;
     flex: 17;
     flex-align: stretch;
+    min-width: 200px;
 `;
 const ActionsMenu = styled.section`
     flex: 0 1 auto;
@@ -38,7 +39,39 @@ const ActionsMenuButton = styled(Button)`
 `;
 const Content = styled.main`
     flex: 47;
+    display: flex;
+    flex-direction: column;
+    flex-align: stretch;
  `;
+const Summary = styled(ExpansionPanel)`
+    height: 130px;
+    ${constants.shadow}
+    margin-bottom: 20px;
+`;
+const SummaryContent = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-align: stretch;
+`;
+const SummaryTotal = styled.section`
+    flex: 15;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+`;
+const SummaryTotalText = styled.span`
+    padding: 10px 0 10px 0;
+    font-weight: bold;
+`;
+
+const SummaryClear = styled.div`
+    flex: 10;
+`;
+const Transactions = styled.section`
+    ${constants.shadow}
+`;
 
 class CashFlow extends Component {
 
@@ -101,20 +134,28 @@ class CashFlow extends Component {
         </Sidebar>
         <Spacer flex="1"/>
         <Content>
-          <select value={this.state.filterTypeBy} onChange={this.updateFilterTypeBy} name="filterType">
-            <option value="income">Příjem</option>
-            <option value="expense">Výdaj</option>
-            <option value="all">Vše</option>
-          </select>
-          <TransactionsWrapper className="cash_flow">
-            <h2>Všechny transakce:</h2>
+          <Summary title="Shrnutí a filtry">
+            <SummaryContent>
+              <Spacer flex="75"/>
+              <SummaryTotal>
+                <select value={this.state.filterTypeBy} onChange={this.updateFilterTypeBy} name="filterType">
+                  <option value="income">Příjem</option>
+                  <option value="expense">Výdaj</option>
+                  <option value="all">Vše</option>
+                </select>
+                <SummaryTotalText>Celkem: 5152 Kč</SummaryTotalText>
+              </SummaryTotal>
+              <SummaryClear/>
+            </SummaryContent>
+          </Summary>
+          <Transactions className="cash_flow">
             <div>{
               this.state.transactions.map((transaction) =>{
                 return <Transaction transaction={transaction} />
               })
             }</div>
 
-          </TransactionsWrapper>
+          </Transactions>
         </Content>
         <Spacer flex="25"/>
       </TransactionsPageWrapper>

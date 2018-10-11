@@ -1,41 +1,58 @@
 import React from "react";
 import styled from "styled-components";
-
-const DataDisplay = styled.div`
-    color: #434343;
-`;
-
-const Label = styled.div`
-    font-weight: bold;
-    color: #222222;
-`;
+import constants from "../Constants";
 
 const TransactionWrapper = styled.div`
     display: flex;
     min-width: 500px;
-    -webkit-box-shadow: 10px 10px 29px 3px rgba(0,0,0,0.16);
-    -moz-box-shadow: 10px 10px 29px 3px rgba(0,0,0,0.16);
-    box-shadow: 10px 10px 29px 3px rgba(0,0,0,0.16);
-    margin-bottom: 5px;
     background-color: white;
+    align-items: stretch;
+    height: 65px;
+    ${constants.thinBottomBorder}    
 `;
 
-const Property = styled.div`
-    flex: 1;
-    flex-base: 500px;
-    padding: 5px;
+const TransactionInfo = styled.section`
+    padding-left: 9%;
+    flex: 80;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 `;
+
+const Name = styled.span`
+    margin-bottom: 5px;
+`;
+const Date = styled.span`
+  
+`;
+
+const TransactionValue = styled.section`
+    flex: 15;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+`;
+const Value = styled.span`
+    color: ${({type}) => type === "income" ? "black" : "red"};
+`;
+const TransactionMenu = styled.div`
+    flex: 10;
+`;
+
 
 export default ({ transaction: { name, type, value, created, id } }) => (
     <TransactionWrapper key={id}>
-      <Property>
-        <Label>Název: </Label><DataDisplay className="transaction_name">{name}</DataDisplay>
-      </Property>
-      <Property>
-        <Label>Typ: </Label><DataDisplay>{type}</DataDisplay>
-      </Property>
-      <Property>
-        <Label>Hodnota: </Label><DataDisplay>{value}</DataDisplay>
-      </Property>
+      <TransactionInfo>
+        <Name>{name}</Name>
+        <Date>{created}</Date>
+      </TransactionInfo>
+      <TransactionValue>
+        <Value type={type}>{ (type === "income" ? "+" : "-") + value} Kč</Value>
+      </TransactionValue>
+      <TransactionMenu>
+
+      </TransactionMenu>
     </TransactionWrapper>
 )
