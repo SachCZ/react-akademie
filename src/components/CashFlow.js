@@ -2,16 +2,43 @@ import Transaction from "./Transaction"
 import data from "../data.json"
 import React, {Component}from "react";
 import styled from "styled-components"
+import Spacer from "./Spacer"
+import Button from "./Button";
+import constants from "../Constants"
 
 const TransactionsPageWrapper = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 20px;
 `;
-
 const TransactionsWrapper = styled.div`
-    max-width: 500px;
+
 `;
+const Sidebar = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 17;
+    flex-align: stretch;
+`;
+const ActionsMenu = styled.section`
+    flex: 0 1 auto;
+    min-height: 400px;
+    ${constants.shadow}
+`;
+const ActionsMenuRow = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+`;
+const ActionsMenuButton = styled(Button)`
+    flex: 0 0 80%;
+`;
+const Content = styled.main`
+    flex: 47;
+ `;
 
 class CashFlow extends Component {
 
@@ -63,22 +90,33 @@ class CashFlow extends Component {
 
   render(){
     return(
-      <TransactionsPageWrapper id="transactions">
-        <button onClick={this.addTransaction}>Přidat transakci</button>
-        <select value={this.state.filterTypeBy} onChange={this.updateFilterTypeBy} name="filterType">
-          <option value="income">Příjem</option>
-          <option value="expense">Výdaj</option>
-          <option value="all">Vše</option>
-        </select>
-        <TransactionsWrapper className="cash_flow">
-          <h2>Všechny transakce:</h2>
-          <div>{
-            this.state.transactions.map((transaction) =>{
-              return <Transaction transaction={transaction} />
-            })
-          }</div>
+      <TransactionsPageWrapper id="transactions_page">
+        <Spacer flex="10"/>
+        <Sidebar>
+          <ActionsMenu>
+            <ActionsMenuRow>
+              <ActionsMenuButton large primary onClick={this.addTransaction}>Přidat transakci</ActionsMenuButton>
+            </ActionsMenuRow>
+          </ActionsMenu>
+        </Sidebar>
+        <Spacer flex="1"/>
+        <Content>
+          <select value={this.state.filterTypeBy} onChange={this.updateFilterTypeBy} name="filterType">
+            <option value="income">Příjem</option>
+            <option value="expense">Výdaj</option>
+            <option value="all">Vše</option>
+          </select>
+          <TransactionsWrapper className="cash_flow">
+            <h2>Všechny transakce:</h2>
+            <div>{
+              this.state.transactions.map((transaction) =>{
+                return <Transaction transaction={transaction} />
+              })
+            }</div>
 
-        </TransactionsWrapper>
+          </TransactionsWrapper>
+        </Content>
+        <Spacer flex="25"/>
       </TransactionsPageWrapper>
     )
   }
