@@ -2,6 +2,10 @@ import React from "react";
 import CashFlow from "../components/CashFlow"
 import {injectGlobal} from "styled-components"
 import styled from "styled-components"
+import Modal from 'react-modal'
+
+
+Modal.setAppElement('#root');
 
 injectGlobal`
   * {

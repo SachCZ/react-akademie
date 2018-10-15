@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import constants from "../Constants"
 import Spacer from "./Spacer"
+import { MdExpandMore } from "react-icons/md"; //https://react-icons.netlify.com/#/icons/md
 
 const ExpansionPanel = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const Content = styled.section`
 export default ({children, className, title}) => (
   <ExpansionPanel className={className}>
     <ToggleButton>
-      <span>{title}</span><Spacer flex="auto" /><span>^</span>
+      <span>{title}</span><Spacer flex="auto" /><span><MdExpandMore style={{ verticalAlign: 'middle' }} size="1.5em"/></span>
     </ToggleButton>
     <Content>
       {children}

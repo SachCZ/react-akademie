@@ -6,6 +6,11 @@ import Spacer from "./Spacer"
 import Button from "./Button";
 import constants from "../Constants"
 import ExpansionPanel from "./ExpansionPanel";
+import Select from 'react-select';
+import Modal from 'react-modal';
+import SlideToggle from "./SlideToggle";
+import InputField from "./InputField"
+
 
 const TransactionsPageWrapper = styled.div`
   display: flex;
@@ -47,6 +52,7 @@ const Summary = styled(ExpansionPanel)`
     height: 130px;
     ${constants.shadow}
     margin-bottom: 20px;
+    background-color: white;
 `;
 const SummaryContent = styled.div`
     height: 100%;
@@ -55,17 +61,125 @@ const SummaryContent = styled.div`
     flex-align: stretch;
 `;
 const SummaryTotal = styled.section`
-    flex: 15;
+    flex: 35;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
 `;
+const selectCustomStyles = {
+  container: (base, state) =>({
+    ...base,
+    border: "0",
+    outlineWidth: "0"
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? constants.secondaryColor : "white"
+  }),
+  control: (base, state) => ({
+    ...base,
+    width: "100px",
+    border: "0",
+    '& > div:first-child': {
+      display: "flex",
+      justifyContent: "flex-end"
+    },
+    borderRadius: "0",
+    boxShadow: "none",
+    cursor: "pointer"
+  }),
+  input: (base, state) => ({
+    color: "transparent",
+  }),
+  dropdownIndicator: (base, state) => ({
+    ...base,
+    paddingRight: "0",
+    color: "black"
+  }),
+  indicatorSeparator: (base, state) => ({
+    ...base,
+    backgroundColor: constants.secondaryColor,
+  }),
+};
+
+const modalAddTransactionCustomStyles = {
+  overlay: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  content: {
+    position: "static",
+    flex: "0 1 550px",
+    padding: "0",
+    borderRadius: "0",
+    display: "flex",
+    alignItems: "stretch"
+  }
+};
+
+const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+`;
+
+const ModalHeader = styled.h2`
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  color: #666666;
+`;
+
+const ModalContent = styled.section`
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+`;
+
+const ModalColumn = styled.div`
+  flex: 0.5;
+  flex-direction: column;
+  display: flex;
+  flex: 0.45;
+`;
+
+const ModalColumnLeft = styled(ModalColumn)`
+
+`;
+
+
+const ModalColumnRight = styled(ModalColumn)`
+    align-items: flex-end;
+`;
+const ModalSlideToggle = styled(SlideToggle)`
+    margin-top: 10px;
+    margin-bottom: 20px;
+`;
+const ModalNameInput = styled(InputField)`
+    margin-bottom: 20px;
+`;
+
+const ModalDateInput = styled(InputField)`
+    margin-bottom: 96px;
+`;
+const ModalValueInput = styled(InputField)`
+    margin-bottom: 48px;
+    text-align: right;
+    font-size: 2.5em;
+    margin-top: auto;
+`;
 const SummaryTotalText = styled.span`
     padding: 10px 0 10px 0;
     font-weight: bold;
 `;
-
+const SummaryTotalNumber = styled.span`
+    color: ${({type}) => type === "expense" ? "red" : "black"};
+    font-weight: normal;
+`;
 const SummaryClear = styled.div`
     flex: 10;
 `;
@@ -73,11 +187,18 @@ const Transactions = styled.section`
     ${constants.shadow}
 `;
 
+const options = [
+  { value: 'all', label: 'Vše' },
+  { value: 'income', label: 'Příjmy' },
+  { value: 'expense', label: 'Výdaje' }
+];
+
 class CashFlow extends Component {
 
   state = {
     transactions: [],
-    filterTypeBy: ""
+    selectedTypeOption: options[0],
+    modalAddTransactionIsOpen: false
   };
 
   componentDidMount(){
@@ -85,22 +206,24 @@ class CashFlow extends Component {
 
   }
 
-  updateFilterTypeBy = (evt) => {
-    this.setState({
-      filterTypeBy: evt.target.value
-    }, this.filterType);
+  openModalAddTransaction = () => (this.setState({modalAddTransactionIsOpen: true}));
+  closeModalAddTransaction = () => (this.setState({modalAddTransactionIsOpen: false}));
+
+  updateFilterTypeBy = (selectedOption) => {
+    this.setState({selectedTypeOption: selectedOption}, this.filterType);
   };
 
   filterType= () => {
     this.setState( (prevState, props) => {
-      if (this.state.filterTypeBy === "all") {
+      const selectedType = prevState.selectedTypeOption.value;
+      if (selectedType === "all") {
         return {
           transactions: data
         }
-      } else if (this.state.filterTypeBy === "expense" || this.state.filterTypeBy === "income") {
+      } else if (selectedType === "expense" || selectedType === "income") {
         return {
           transactions: data.filter((transaction) => {
-            return transaction.type === prevState.filterTypeBy;
+            return transaction.type === selectedType;
           })
         }
       }
@@ -116,10 +239,16 @@ class CashFlow extends Component {
       "id": 1522370056000
     };
 
+
     this.setState((prevState, props) => ({
-      transactions: [...prevState.transactions, transaction]
-    }));
+      transactions: [transaction, ...prevState.transactions]
+    }), this.closeModalAddTransaction);
   };
+
+  total = () => this.state.transactions.reduce((sum, transaction) => {
+    const sign = transaction.type === "income" ? 1 : -1;
+    return sum + sign * transaction.value;
+  }, 0);
 
   render(){
     return(
@@ -128,7 +257,32 @@ class CashFlow extends Component {
         <Sidebar>
           <ActionsMenu>
             <ActionsMenuRow>
-              <ActionsMenuButton large primary onClick={this.addTransaction}>Přidat transakci</ActionsMenuButton>
+              <ActionsMenuButton large secondary onClick={this.openModalAddTransaction}>Nová transakce</ActionsMenuButton>
+              <Modal
+                isOpen={this.state.modalAddTransactionIsOpen}
+                onRequestClose={this.closeModalAddTransaction}
+                style={modalAddTransactionCustomStyles}
+                contentLabel="Nová transakce"
+              >
+                <ModalWrapper>
+                  <ModalHeader>Nová transakce</ModalHeader>
+                  <ModalContent>
+                    <ModalColumnLeft>
+                      <ModalSlideToggle>
+                        <span>Příjem</span>
+                        <span>Výdaj</span>
+                      </ModalSlideToggle>
+                      <ModalNameInput placeholder="Název"/>
+                      <ModalDateInput placeholder="Datum"/>
+                    </ModalColumnLeft>
+                    <Spacer flex="0.1"/>
+                    <ModalColumnRight>
+                      <ModalValueInput placeholder="Hodnota"/>
+                      <Button large primary onClick={this.addTransaction}>Přidat transakci</Button>
+                    </ModalColumnRight>
+                  </ModalContent>
+                </ModalWrapper>
+              </Modal>
             </ActionsMenuRow>
           </ActionsMenu>
         </Sidebar>
@@ -136,14 +290,15 @@ class CashFlow extends Component {
         <Content>
           <Summary title="Shrnutí a filtry">
             <SummaryContent>
-              <Spacer flex="75"/>
+              <Spacer flex="55"/>
               <SummaryTotal>
-                <select value={this.state.filterTypeBy} onChange={this.updateFilterTypeBy} name="filterType">
-                  <option value="income">Příjem</option>
-                  <option value="expense">Výdaj</option>
-                  <option value="all">Vše</option>
-                </select>
-                <SummaryTotalText>Celkem: 5152 Kč</SummaryTotalText>
+                <Select
+                  styles={selectCustomStyles}
+                  value={this.state.selectedTypeOption}
+                  onChange={this.updateFilterTypeBy}
+                  options={options}
+                />
+                <SummaryTotalText>Celkem: <SummaryTotalNumber type={this.state.selectedTypeOption.value}>{this.total()} Kč</SummaryTotalNumber></SummaryTotalText>
               </SummaryTotal>
               <SummaryClear/>
             </SummaryContent>
