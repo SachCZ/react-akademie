@@ -2,13 +2,10 @@ import React, {Component} from "react";
 import styled from "styled-components"
 import constants from "../Constants"
 
-const Switch = styled.label`
+const Switch = styled.div`
   width: 150px;
   display: flex;
-`;
-
-const Checkbox = styled.input`
-  display: none;
+  appearance: none;
 `;
 
 const SliderContainer = styled.div`
@@ -36,33 +33,25 @@ const SliderContainer = styled.div`
 `;
 
 
-class SlideToggle extends Component {
-  state = {
-    checked: true,
-  };
-  props = {
-    onChange: undefined,
-    children: [],
-    className: ""
-  };
-
-  handleChange = (evt) => {
-    this.setState({checked: evt.target.checked});
-    if(typeof this.props.onChange === "function"){
-      this.props.onChange(evt);
-    }
+const SlideToggleView = ({children, checked, onChange, className, name}) => {
+  const handleClick = () => {
+    onChange({
+      target: {
+        type: 'checkbox',
+        name: name,
+        checked: !checked
+      }
+    });
   };
 
-  render() {
-    return (
-      <Switch className={this.props.className}>
-        <Checkbox type="checkbox" onChange={this.handleChange}/>
-        <SliderContainer checked={this.state.checked}>
-          {this.props.children}
-        </SliderContainer>
-      </Switch>
-    );
-  }
-}
 
-export default SlideToggle;
+  return (
+    <Switch className={className} onClick={handleClick}>
+      <SliderContainer checked={checked}>
+        {children}
+      </SliderContainer>
+    </Switch>
+  );
+};
+
+export default SlideToggleView;

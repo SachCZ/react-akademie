@@ -1,11 +1,12 @@
-import React from "react";
 import styled from "styled-components"
 import constants from "../Constants"
 
-const Button = styled.button`
+const ButtonView = styled.button`
     cursor: pointer;
     font-weight: bold;
     color: white;
+    width: 100%;
+    height: 100%;
     background-color: ${props => props.secondary ? constants.secondaryColor : constants.primaryColor};
     border: 0;
     padding: ${
@@ -17,6 +18,4 @@ const Button = styled.button`
     }
 `;
 
-export default ({flex, children, className, onClick, primary, secondary, large, medium, small}) => {
-  return <Button className={className} primary={primary} secondary={secondary} large={large} medium={medium} small={small} onClick={onClick}>{children}</Button>
-};
+export default ButtonView;

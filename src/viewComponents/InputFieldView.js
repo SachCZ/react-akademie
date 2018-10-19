@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components"
 import constants from "../Constants"
 
-const Input = styled.input`
+const InputFieldView = styled.input`
   border: 0;
   border-bottom: 2px solid ${constants.secondaryColor};
   width: 220px;
@@ -12,10 +11,4 @@ const Input = styled.input`
   }
 `;
 
-const InputField = ({className, placeholder}) => {
-  return (
-    <Input placeholder={placeholder} className={className}/>
-  );
-};
-
-export default InputField;
+export default InputFieldView;
