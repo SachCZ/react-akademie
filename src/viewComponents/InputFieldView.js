@@ -3,11 +3,16 @@ import constants from "../Constants"
 
 const InputFieldView = styled.input`
   border: 0;
-  border-bottom: 2px solid ${constants.secondaryColor};
-  width: 220px;
+  border: 1px solid ${constants.lightGrey};
+  padding: 20px 20px 15px 10px;
+  border-bottom: 1px solid ${constants.darkerShadow};
+  width: 100%;
   :focus {
     outline: none;
-    border-bottom: 2px solid ${constants.primaryColor};
+    border: 2px solid ${constants.primaryColor};
+  }
+  ::placeholder {
+    font-style: italic;
   }
 `;
 

@@ -3,7 +3,7 @@ import ListAndPaginatorView from "../viewComponents/ListAndPaginatorView";
 
 class ListAndPaginatorContainer extends Component {
   state={
-    pageSize: 10,
+    pageSize: 25,
     pageNum: 1,
     pagesAround: 1
   };

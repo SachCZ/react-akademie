@@ -4,7 +4,7 @@ import InnerLayout from "./InnerLayout";
 import styled from "styled-components";
 
 const Layout = styled(OuterLayout)`
-  min-width: 550px;
+  min-width: 350px;
 `;
 
 const PageLayout = ({header, content, footer}) => {

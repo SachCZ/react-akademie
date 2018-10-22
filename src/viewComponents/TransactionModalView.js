@@ -4,6 +4,10 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import SlideToggle from "./SlideToggleView";
 import InputField from "./InputFieldView";
+import OuterLayout from "../layoutComponents/OuterLayout";
+import InnerLayout from "../layoutComponents/InnerLayout";
+import constants from "../Constants"
+import InlineSelectView from "./InlineSelectView";
 
 const modalAddTransactionCustomStyles = {
   overlay: {
@@ -13,13 +17,17 @@ const modalAddTransactionCustomStyles = {
   },
   content: {
     position: "static",
-    flex: "0 1 550px",
+    flex: "0 1 350px",
     padding: "0",
     borderRadius: "0",
     display: "flex",
     alignItems: "stretch"
   }
 };
+
+const Label = styled.label`
+  padding-left: 5px;
+`;
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -33,47 +41,17 @@ const ModalHeader = styled.h2`
   margin: 0;
   padding: 10px;
   border-bottom: 1px solid rgb(204, 204, 204);
-  color: #666666;
-`;
-
-const ModalContent = styled.form`
-  display: flex;
-  flex-direction: row;
-  padding: 30px;
-`;
-
-const ModalColumn = styled.div`
-  flex: 0.5;
-  flex-direction: column;
-  display: flex;
-  flex: 0.45;
-`;
-
-const ModalColumnLeft = styled(ModalColumn)`
-
+  color: white;
+  ${constants.primaryStyling};
 `;
 
 
-const ModalColumnRight = styled(ModalColumn)`
-    align-items: flex-end;
-`;
-const ModalSlideToggle = styled(SlideToggle)`
-    margin-top: 10px;
-    margin-bottom: 20px;
-`;
-const ModalNameInput = styled(InputField)`
-    margin-bottom: 20px;
-`;
-const ModalValueInput = styled(InputField)`
-    margin-bottom: 48px;
-    text-align: right;
-    font-size: 2.5em;
-    margin-top: auto;
-`;
+
+
 
 const TransactionModal = (props)=> {
-  const {transaction, onSubmit, onChange, buttonText, label} = props;
-  const {name, type, created, value} = transaction;
+  const {transaction, onSubmit, onChange, onTypeChange, buttonText, label, typeOptions} = props;
+  const {name, value} = transaction;
 
   return (
     <Modal
@@ -83,19 +61,32 @@ const TransactionModal = (props)=> {
     >
       <ModalWrapper>
         <ModalHeader>{label}</ModalHeader>
-        <ModalContent onSubmit={onSubmit}>
-          <ModalColumnLeft>
-            <ModalSlideToggle checked={type === "income"} onChange={onChange} name="type">
-              <span>Příjem</span>
-              <span>Výdaj</span>
-            </ModalSlideToggle>
-            <ModalNameInput onChange={onChange} value={name} name="name" placeholder="Název"/>
-          </ModalColumnLeft>
-          <ModalColumnRight>
-            <ModalValueInput onChange={onChange} value={value} name="value" placeholder="Hodnota"/>
-            <Button large primary type="submit">{buttonText}</Button>
-          </ModalColumnRight>
-        </ModalContent>
+        <form onSubmit={onSubmit}>
+          <OuterLayout direction="column" align="stretch" padding="30px" marginBetween={15}>
+            <InnerLayout>
+              <InlineSelectView
+                selectedOption={transaction.type}
+                onChange={onTypeChange}
+                options={typeOptions}
+              />
+            </InnerLayout>
+            <InnerLayout>
+              <OuterLayout direction="column" marginBetween={5} align="stretch">
+                <InnerLayout flex="0 0 1em"><Label>Název</Label></InnerLayout>
+                <InnerLayout><InputField onChange={onChange} value={name} name="name" placeholder='např. "Nové boty"'/></InnerLayout>
+              </OuterLayout>
+            </InnerLayout>
+            <InnerLayout>
+              <OuterLayout direction="column"  marginBetween={5} align="stretch">
+                <InnerLayout flex="0 0 1em"><Label>Hodnota</Label></InnerLayout>
+                <InnerLayout><InputField onChange={onChange} value={value} name="value" placeholder='např. "1400"'/></InnerLayout>
+              </OuterLayout>
+            </InnerLayout>
+            <InnerLayout>
+              <Button large primary type="submit">{buttonText}</Button>
+            </InnerLayout>
+          </OuterLayout>
+        </form>
       </ModalWrapper>
     </Modal>
   )

@@ -3,75 +3,42 @@ import OuterLayout from "../layoutComponents/OuterLayout";
 import InnerLayout from "../layoutComponents/InnerLayout";
 import ExpansionPanelView from "./ExpansionPanelView";
 import constants from "../Constants";
-import Select from 'react-select';
 import styled from "styled-components";
+import InlineSelectView from "./InlineSelectView";
+import ButtonView from "./ButtonView";
 
-const selectCustomStyles = {
-  container: (base, state) => ({
-    ...base,
-    border: "0",
-    outlineWidth: "0"
-  }),
-  option: (base, state) => ({
-    ...base,
-    backgroundColor: state.isSelected ? constants.secondaryColor : "white"
-  }),
-  control: (base, state) => ({
-    ...base,
-    width: "100px",
-    border: "0",
-    "& > div:first-child": {
-      display: "flex",
-      justifyContent: "flex-end"
-    },
-    borderRadius: "0",
-    boxShadow: "none",
-    cursor: "pointer"
-  }),
-  input: (base, state) => ({
-    color: "transparent"
-  }),
-  dropdownIndicator: (base, state) => ({
-    ...base,
-    paddingRight: "0",
-    color: "black"
-  }),
-  indicatorSeparator: (base, state) => ({
-    ...base,
-    backgroundColor: constants.secondaryColor
-  })
-};
-
-const Summary = styled(ExpansionPanelView)`
+const Summary = styled(OuterLayout)`
   ${constants.shadow}
   background-color: white;
 `;
 
+const Total = styled(InnerLayout)`
+  font-weight: bold;
+`;
 
 
-const SummaryView = ({ onTypeChange, typeOption, total, options, className }) => {
+const SummaryView = ({ onTypeChange, typeOption, total, options, className, onNewTransactionClick }) => {
   return (
-    <Summary className={className} title="Shrnutí a filtry">
-      <OuterLayout align="stretch">
-        <InnerLayout flex="0.5">
-
-        </InnerLayout>
-        <InnerLayout flex="0.4" direction="column">
-          <OuterLayout direction="column" align="flex-end" justify="center">
+    <Summary className={className} align="stretch">
+      <OuterLayout align="stretch" wrap="wrap" marginBetween={20}>
+        <InnerLayout flex="1 1 160px">
+          <OuterLayout align="stretch" direction="column" justify="flex-end" marginBetween={5}>
             <InnerLayout flex="0 0 40px">
-              <Select
-                styles={selectCustomStyles}
-                value={typeOption}
-                onChange={onTypeChange}
-                options={options}
-                name="type"
-              />
+              <ButtonView secondary onClick={onNewTransactionClick}>Nová transakce</ButtonView>
             </InnerLayout>
-            <InnerLayout flex="0 0 25px">Celkem: {total}</InnerLayout>
           </OuterLayout>
         </InnerLayout>
-        <InnerLayout flex="0.1">
-
+        <InnerLayout flex="12 1 310px" direction="column">
+          <OuterLayout direction="column" align="flex-end" justify="flex-end" marginBetween={5}>
+            <Total flex="1 1 25px">Celkem: {total} Kč</Total>
+            <InnerLayout flex="0 0 40px">
+              <InlineSelectView
+                selectedOption={typeOption}
+                onChange={onTypeChange}
+                options={options}
+              />
+            </InnerLayout>
+          </OuterLayout>
         </InnerLayout>
       </OuterLayout>
     </Summary>

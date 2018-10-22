@@ -9,7 +9,10 @@ import PageLayout from "./layoutComponents/PageLayout";
 import OuterLayout from "./layoutComponents/OuterLayout";
 import InnerLayout from "./layoutComponents/InnerLayout";
 import OverviewPage from "./pages/OverviewPage";
-import MainImageSrc from "./images/main_image.jpg"
+import MainImageSrc from "./images/main_image.jpg";
+import LogoFontSrc from "./fonts/WorkSans-ExtraLight.ttf";
+import ButtonsFontSrc from "./fonts/WorkSans-Regular.ttf";
+import axios from 'axios';
 
 //TODO add close button to modal
 //TODO make inputs more clickable
@@ -28,8 +31,15 @@ injectGlobal`
     margin: 0;
     background-color: #EEEEEE;
   }
+  @font-face {
+    font-family: 'LogoFont';
+    src: url(${LogoFontSrc});
+  }
+  @font-face {
+    font-family: 'ButtonFont';
+    src: url(${ButtonsFontSrc});
+  }
 `;
-
 
 const MainBar = styled.nav`
     background-color: ${constants.primaryColor};
@@ -48,26 +58,46 @@ const MainBarLink = styled(Link)`
     height: 100%;
     width: 100%;
     line-height: 50px;
-    font-weight: bold;
     text-decoration: none;
     color: white;
+    font-family: ButtonFont;
+`;
+
+const FooterLayout = styled(InnerLayout)`
+  background-color: ${constants.darkGrey};
 `;
 
 const MainImageContainer = styled(InnerLayout)`
   ${constants.darkerShadow};
   border-bottom: 1px solid ${constants.darkGrey};
+  font-family: LogoFont, sans-serif;
+  font-size: 3.5vw;
+  color: white;
+  line-height: 15vw;
+  padding-left: 10%;
   position: relative;
-  &:after {
+  &:before {
+    background-color: ${constants.primaryColor};
     content: "";
-    background-image: url(${MainImageSrc});
-    background-position: center;
-    opacity: 0.9;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: -1;   
+    z-index: -2;
+    opacity: 1;
+  }
+  &:after {
+    content: "";
+    background-image: url(${MainImageSrc});
+    background-position: center;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
    }
 `;
 
@@ -77,12 +107,13 @@ const App = () => (
       <InnerLayout flex="0 0 50px;">
         <MainBar>
           <OuterLayout>
-            <InnerLayout flex="0 0 200px"><MainBarLink to="/">Včechny transakce</MainBarLink></InnerLayout>
+            <InnerLayout flex="0 0 200px"><MainBarLink to="/">Všechny transakce</MainBarLink></InnerLayout>
             <InnerLayout flex="0 0 200px"><MainBarLink to="/Overview">Přehled</MainBarLink></InnerLayout>
           </OuterLayout>
         </MainBar>
       </InnerLayout>
-      <MainImageContainer flex="0 0 300px;">
+      <MainImageContainer flex="0 0 15vw;">
+        VŠECHNY TRANSAKCE
       </MainImageContainer>
     </OuterLayout>
   )} content={(
@@ -93,7 +124,7 @@ const App = () => (
     </Switch>
   )} footer={(
     <OuterLayout direction="column" align="stretch">
-      <InnerLayout flex="0 0 200px;"></InnerLayout>
+      <FooterLayout flex="0 0 300px;"></FooterLayout>
     </OuterLayout>
   )}/>
 );

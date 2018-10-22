@@ -1,17 +1,41 @@
 import React, { PureComponent } from "react";
-import ContentLayout from "../layoutComponents/ContentLayout";
 import OuterLayout from "../layoutComponents/OuterLayout";
 import InnerLayout from "../layoutComponents/InnerLayout";
 import TransactionView from "./TransactionView";
 import ListAndPaginatorContainer from "../containerComponents/ListAndPaginatorContainer";
-import SummaryContainer from "../containerComponents/SummaryContainer";
-import ButtonView from "./ButtonView";
 import styled from "styled-components";
 import constants from "../Constants";
+import BackgroundImageSrc from "../images/clouds.jpg";
+import SummaryView from "./SummaryView";
 
-const LeftSidebar = styled(OuterLayout)`
-  background-color: white;
-  ${constants.shadow}
+const Layout = styled(OuterLayout)`
+  position: relative;
+  &:before {
+    background-color: ${constants.primaryColor};
+    opacity: 0.35;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -2;
+  }
+  &:after {
+    content: "";
+    background-image: url(${BackgroundImageSrc});
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+   }
 `;
 
 class TransactionsView extends PureComponent {
@@ -19,34 +43,30 @@ class TransactionsView extends PureComponent {
   render() {
     const {
       transactions,
-      transactionsRaw,
       onNewTransactionClick,
       onFiltersChange,
       onEditTransactionClick,
       onDeleteTransactionClick,
-      onFocusTransactionClick
+      onFocusTransactionClick,
+      typeOption,
+      total,
+      typeOptions
     } = this.props;
 
     return (
-      <OuterLayout direction="column" align="stretch">
-        <InnerLayout flex="0 0 30px"/>
+      <Layout direction="column" align="stretch">
         <InnerLayout>
-          <ContentLayout
-            leftSidebar={
-              <LeftSidebar direction="column" align="stretch" marginBetween={10} padding={"20px 20px 20px 20px"}>
-                <InnerLayout>
-                  <OuterLayout justify="center">
-                    <InnerLayout
-                      flex="0 0 90%">{<ButtonView secondary onClick={onNewTransactionClick}>Nová transakce</ButtonView>}
-                    </InnerLayout>
-                  </OuterLayout>
-                </InnerLayout>
-              </LeftSidebar>
-            }
-            content={
+          <OuterLayout justify="center" padding="20px 0 20px 0">
+            <InnerLayout flex="0.2 1 20%"></InnerLayout>
+            <InnerLayout flex="0.6 0 60%" minWidth={350} maxWidth="800px">
               <OuterLayout direction="column" align="stretch" marginBetween={20}>
-                <InnerLayout flex="0 0 130px" direction="column">
-                  <SummaryContainer arrayToFilter={transactionsRaw} onFiltersChange={onFiltersChange}/>
+                <InnerLayout flex="0 0 auto" direction="column">
+                  <SummaryView onTypeChange={onFiltersChange}
+                               typeOption={typeOption}
+                               options={typeOptions}
+                               total={total}
+                               onNewTransactionClick={onNewTransactionClick}
+                  />
                 </InnerLayout>
                 <InnerLayout>
                   <ListAndPaginatorContainer>
@@ -61,12 +81,11 @@ class TransactionsView extends PureComponent {
                   </ListAndPaginatorContainer>
                 </InnerLayout>
               </OuterLayout>
-            }
-            rightSidebar={
-              <div></div>
-            }
-          /></InnerLayout>
-      </OuterLayout>
+            </InnerLayout>
+            <InnerLayout flex="0.2 1 20%"></InnerLayout>
+          </OuterLayout>
+        </InnerLayout>
+      </Layout>
     );
   };
 }

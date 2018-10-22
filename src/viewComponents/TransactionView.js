@@ -7,7 +7,8 @@ import ExpanderView from "./ExpanderView";
 
 const TransactionWrapper = styled.div`
     display: flex;
-    background-color: ${({isFocused}) => isFocused ? "#EEEEEE" : "white"}
+    background-color: ${({isFocused}) => isFocused ? "white" : "transparent"}
+    opacity: 1;
     align-items: stretch;
     height: 65px;
     ${constants.thinBottomBorder}

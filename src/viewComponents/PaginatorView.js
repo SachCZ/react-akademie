@@ -12,7 +12,13 @@ const PaginationWrapper = styled.div`
 `;
 const PageTick = styled.div`
    flex: 0 0 40px;
-   background-color: ${({selected}) => selected ? constants.primaryColor : constants.secondaryColor};
+   ${({selected}) => {
+     if (selected){
+       return constants.primaryStyling;
+     } else {
+       return constants.secondaryStyling;
+     }
+   }};
    color: white;
    font-weight: bold;
    line-height: 40px;

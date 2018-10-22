@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 const Layout = styled(OuterLayout)`
   ${constants.shadow}
+  ${constants.semiTransparent}
 `;
 
 const ListAndPaginatorView = ({ pageSize, pageNum, onPageNumChange, pagesAround, children }) => {
