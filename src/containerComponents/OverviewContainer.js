@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import moment from "moment";
-import axios from "../util/axios";
 import OverviewView from "../viewComponents/OverviewView";
 import withTransactions from "../hoc/withTransactions";
 

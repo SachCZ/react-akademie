@@ -16,6 +16,11 @@ import { MdFormatLineSpacing, MdEqualizer } from "react-icons/md";
 import moment from "moment";
 import "moment/locale/cs";
 
+//TODO rename page overview in header!
+//TODO readme a aby to fungovalo, konzole čistá, errory hlavne npm install a npm start a server start
+//TODO tlacitko na zavirani
+//TODO when done remove todos :-D
+
 moment.locale('cs');
 
 
