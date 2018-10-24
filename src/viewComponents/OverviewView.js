@@ -4,6 +4,8 @@ import OuterLayout from "../layoutComponents/OuterLayout";
 import InnerLayout from "../layoutComponents/InnerLayout";
 import constants from "../Constants";
 
+//TODO refactor this
+
 const Layout = styled.div`
   display: flex;
   justify-content center;

@@ -6,9 +6,10 @@ import styled from "styled-components";
 import constants from "../Constants";
 import { MdFormatLineSpacing } from "react-icons/md";
 
+//TODO refactor this
+
 const Layout = styled(OuterLayout)`
-  ${constants.shadow}
-  background-color: white;
+
 `;
 
 const EndText = styled.span`
@@ -25,11 +26,11 @@ const LoadIcon = styled(MdFormatLineSpacing)`
   margin-left: 5px;
 `;
 
-const LoadableListView = ({displayNum, onLoadMoreClicked, children}) => {
+const LoadableListView = ({displayNum, onLoadMoreClicked, children, className}) => {
   const items = children.slice(0, displayNum);
 
   return (
-    <Layout direction="column" align="stretch" marginBetween={20} padding="0 0 60px 0">
+    <Layout className={className} direction="column" align="stretch" marginBetween={20} padding="0 0 60px 0">
       <InnerLayout flex="0 0 auto">
         <OuterLayout direction="column" align="stretch">
           {items.map((item, index) => <InnerLayout key={index}>{item}</InnerLayout>)}

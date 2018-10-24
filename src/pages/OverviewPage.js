@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import OuterLayout from "../layoutComponents/OuterLayout";
-import InnerLayout from "../layoutComponents/InnerLayout";
-import constants from "../Constants";
+import React, { Fragment } from "react";
 import OverviewContainer from "../containerComponents/OverviewContainer";
+import ImageBarView from "../viewComponents/ImageBarView";
 
 const OverviewPage = () => {
 
   return (
-    <OverviewContainer/>
+    <Fragment>
+      <ImageBarView text="PŘEHLED"/>
+      <OverviewContainer/>
+    </Fragment>
   );
 };
 

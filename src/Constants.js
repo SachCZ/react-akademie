@@ -1,11 +1,13 @@
 const lightGrey = "#DDDDDD";
 const darkGrey = "#444444";
+const baseColor = "white";
 
 export default {
   primaryColor: "#3d5861",
   secondaryColor: "#755681",
   lightGrey: lightGrey,
   darkGrey: darkGrey,
+  grey: "#767676",
   shadow: `
     -webkit-box-shadow: 10px 10px 29px 3px rgba(0,0,0,0.16);
     -moz-box-shadow: 10px 10px 29px 3px rgba(0,0,0,0.16);
@@ -28,6 +30,7 @@ export default {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96a3a9', endColorstr='#3d5861',GradientType=0 );
     font-family: ButtonFont;
     border-bottom: 1px solid ${darkGrey};
+    color: ${baseColor};
     `,
   secondaryStyling: `
     background: #aa8da1;
@@ -37,5 +40,11 @@ export default {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa8da1', endColorstr='#7b617d',GradientType=0 );
     font-family: ButtonFont;
     border-bottom: 1px solid ${darkGrey};
-    `
+    color: ${baseColor};
+    `,
+  navHeight: "50px",
+  mainImageHeight: "15vw",
+  mainImageMinHeight: "80px",
+  pageMinWidth: "350px",
+  baseColor: baseColor,
 };

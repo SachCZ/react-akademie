@@ -6,6 +6,7 @@ import { MdModeEdit, MdDelete } from "react-icons/md";
 import ExpanderView from "./ExpanderView";
 
 const TransactionWrapper = styled.div`
+    min-width: ${constants.pageMinWidth};
     display: flex;
     background-color: ${({isFocused}) => isFocused ? "rgba(117, 86, 129, 0.1)" : "transparent"};
     align-items: stretch;
@@ -30,7 +31,7 @@ const Name = styled.span`
     text-decoration-color: ${constants.secondaryColor};
 `;
 const DateDisplay = styled.span`
-    color: #767676;
+    color: ${constants.grey};
 `;
 
 const TransactionValue = styled.section`
@@ -57,14 +58,14 @@ const EditButton = styled(MdModeEdit)`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
     margin: 0 10px 0 35px;
-    color:#767676;
+    color: ${constants.grey};
     cursor: pointer;
 `;
 
 const DeleteButton = styled(MdDelete)`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
-    color: #767676;
+    color: ${constants.grey};
     margin: 0 15px 0 10px;
     cursor: pointer;
 `;

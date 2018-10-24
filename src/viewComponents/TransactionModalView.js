@@ -2,12 +2,13 @@ import React from "react";
 import Button from "./ButtonView";
 import Modal from "react-modal";
 import styled from "styled-components";
-import SlideToggle from "./SlideToggleView";
 import InputField from "./InputFieldView";
 import OuterLayout from "../layoutComponents/OuterLayout";
 import InnerLayout from "../layoutComponents/InnerLayout";
 import constants from "../Constants"
 import InlineSelectView from "./InlineSelectView";
+
+//TODO refactor this
 
 const modalAddTransactionCustomStyles = {
   overlay: {
@@ -40,8 +41,6 @@ const ModalHeader = styled.h2`
   text-align: center;
   margin: 0;
   padding: 10px;
-  border-bottom: 1px solid rgb(204, 204, 204);
-  color: white;
   ${constants.primaryStyling};
 `;
 

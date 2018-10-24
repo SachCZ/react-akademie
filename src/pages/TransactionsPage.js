@@ -1,10 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import TransactionsContainer from "../containerComponents/TransactionsContainer";
+import ImageBarView from "../viewComponents/ImageBarView";
 
 const TransactionsPage = () => {
 
   return (
-    <TransactionsContainer/>
+    <Fragment>
+      <ImageBarView text="VŠECHNY TRANSAKCE"/>
+      <TransactionsContainer/>
+    </Fragment>
   );
 };
 
