@@ -8,9 +8,10 @@
       "id": 1487911188000
     },
     {
-      "name": "non autes",
-      "value": 902,
+      "name": "non aute",
       "type": "income",
+      "value": 902,
+      "created": 1522370056000,
       "id": 1522370056000
     },
     {
@@ -56,12 +57,11 @@
       "id": 1512196865000
     },
     {
-      "name": "Ahoj",
+      "name": "elit ex",
       "type": "expense",
       "value": 493,
       "created": 1520275405000,
-      "id": 1520275405000,
-      "isFocused": true
+      "id": 1520275405000
     },
     {
       "name": "fugiat veniam",
@@ -97,6 +97,13 @@
       "value": 872,
       "created": 1509693681000,
       "id": 1509693681000
+    },
+    {
+      "name": "nulla cillum",
+      "type": "income",
+      "value": 860,
+      "created": 1519621971000,
+      "id": 1519621971000
     },
     {
       "name": "fugiat laboris",
@@ -218,9 +225,10 @@
       "id": 1511665901000
     },
     {
-      "name": "eaa et",
-      "value": 123,
+      "name": "ea et",
       "type": "income",
+      "value": 123,
+      "created": 1520289378000,
       "id": 1520289378000
     },
     {
@@ -238,9 +246,10 @@
       "id": 1515311651000
     },
     {
-      "name": "eu easa",
-      "value": 774,
+      "name": "eu ea",
       "type": "expense",
+      "value": 774,
+      "created": 1491719567000,
       "id": 1491719567000
     },
     {
@@ -279,9 +288,10 @@
       "id": 1496731064000
     },
     {
-      "name": "eiusmod excepteurs",
-      "value": 971,
+      "name": "eiusmod excepteur",
       "type": "income",
+      "value": 971,
+      "created": 1520369987000,
       "id": 1520369987000
     },
     {
@@ -362,9 +372,10 @@
       "id": 1514398041000
     },
     {
-      "name": "incididunt deseruntss",
-      "value": 372,
+      "name": "incididunt deserunt",
       "type": "expense",
+      "value": 372,
+      "created": 1521802228000,
       "id": 1521802228000
     },
     {
@@ -382,9 +393,10 @@
       "id": 1505270503000
     },
     {
-      "name": "labore minims",
-      "value": 646,
+      "name": "labore minim",
       "type": "expense",
+      "value": 646,
+      "created": 1520556602000,
       "id": 1520556602000
     },
     {
@@ -437,67 +449,32 @@
       "id": 1515681054000
     },
     {
-      "name": "asdfas",
       "value": 654,
+      "name": "asdf",
       "type": "income",
+      "created": 1526406228489,
       "id": 1522370056001
     },
     {
-      "name": "ahojda",
       "value": 99999,
+      "name": "ahoj",
       "type": "income",
+      "created": 1526406317360,
       "id": 1522370056002
     },
     {
-      "name": "Transakcesdasdsd",
-      "value": "2000",
+      "name": "Boty",
+      "value": "1400",
       "type": "income",
-      "id": 1540226326597
+      "created": 1540370614385,
+      "id": 1540370614385
     },
     {
-      "name": "Názevvis",
-      "value": "2000",
+      "name": "Hodinky",
+      "value": "12000",
       "type": "income",
-      "id": 1540226487296,
-      "isFocused": true
-    },
-    {
-      "name": "Náwregkds",
-      "value": "2000",
-      "type": "income",
-      "id": 1540229380759,
-      "created": 1540229380759
-    },
-    {
-      "name": "Náwregkdsúkgf",
-      "value": "2000",
-      "type": "income",
-      "id": 1540229380935,
-      "created": 1540229380935
-    },
-    {
-      "name": "Nové botxy",
-      "value": "",
-      "type": "income",
-      "id": 1540229948036,
-      "created": 1540229948036
-    },
-    {
-      "name": "Náwregkdsúkgf",
-      "value": "2000",
-      "type": "income",
-      "id": 1540230460516,
-      "created": 1540230460516
-    },
-    {
-      "name": "Nové boty",
-      "value": "1423",
-      "type": {
-        "value": "expense",
-        "label": "Výdaj"
-      },
-      "id": 1540232054698,
-      "created": 1540232054698,
+      "created": 1540399027494,
+      "id": 1540399027495,
       "isFocused": true
     }
   ]

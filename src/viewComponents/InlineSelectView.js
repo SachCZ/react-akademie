@@ -8,9 +8,9 @@ const Button = styled(ButtonView)`
   opacity: ${({selected}) => selected ? "1" : "0.7" };
 `;
 
-const InlineSelectView = ({selectedOption, onChange, options}) => {
+const InlineSelectView = ({selectedOption, onChange, options, className}) => {
   return (
-    <OuterLayout marginBetween={3}>
+    <OuterLayout marginBetween={3} className={className}>
       {options.map(option => <InnerLayout key={option.value} minWidth={100}>
         <Button selected={selectedOption.value === option.value} onClick={(e) => {e.preventDefault(); return onChange(option); }} secondary={selectedOption.value !== option.value}>
           {option.label}

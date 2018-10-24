@@ -28,7 +28,11 @@ const TransactionModalForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    onSubmit(transaction);
+
+    const newTransactionCopy = { ...transaction };
+    newTransactionCopy.type = transaction.type.value;
+
+    onSubmit(newTransactionCopy);
   };
 
   return (

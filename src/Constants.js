@@ -18,7 +18,7 @@ export default {
   minWidth: 550,
   debugLayout: false,
   semiTransparent: `
-    background:rgba(255,255,255,0.9);
+    background:rgba(255,255,255,0.85);
   `,
   primaryStyling: `
     background: #96a3a9;

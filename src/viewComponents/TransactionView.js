@@ -7,10 +7,10 @@ import ExpanderView from "./ExpanderView";
 
 const TransactionWrapper = styled.div`
     display: flex;
-    background-color: ${({isFocused}) => isFocused ? "white" : "transparent"}
-    opacity: 1;
+    background-color: ${({isFocused}) => isFocused ? "rgba(117, 86, 129, 0.1)" : "transparent"};
     align-items: stretch;
     height: 65px;
+    width: 100%;
     ${constants.thinBottomBorder}
     cursor: ${({isFocused}) => isFocused ? "default" : "pointer"}
 `;
@@ -26,6 +26,8 @@ const TransactionInfo = styled.section`
 
 const Name = styled.span`
     margin-bottom: 5px;
+    text-decoration: ${({isFocused}) => isFocused ? "underline" : "none"};
+    text-decoration-color: ${constants.secondaryColor};
 `;
 const DateDisplay = styled.span`
     color: #767676;
@@ -76,8 +78,8 @@ const TransactionView = (props) => {
   return (
     <TransactionWrapper isFocused={isFocused} key={id} onClick={() => isFocused || onRequestFocus(id)}>
       <TransactionInfo>
-        <Name>{name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}</Name>
-        {date.isValid() && <DateDisplay>{date.format("DD. MM. YYYY")}</DateDisplay>}
+        <Name isFocused={isFocused}>{name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}</Name>
+        {date.isValid() && <DateDisplay>{date.format("DD. MM. YYYY HH:MM")}</DateDisplay>}
       </TransactionInfo>
       <TransactionValue>
         <Value type={type}>{(type === "income" ? "+" : "-") + value} Kč</Value>

@@ -3,6 +3,7 @@ import TransactionModalContainer from "./TransactionModalContainer";
 import moment from "moment";
 import TransactionsView from "../viewComponents/TransactionsView";
 import axios from '../util/axios';
+import withTransactions from "../hoc/withTransactions";
 
 const emptyModalTransaction = {
   name: "",
@@ -13,7 +14,6 @@ const emptyModalTransaction = {
 class TransactionsContainer extends Component {
 
   state = {
-    transactions: [],
     modalAddTransactionIsOpen: false,
     modalEditTransactionIsOpen: false,
     pageNum: 1,
@@ -27,22 +27,9 @@ class TransactionsContainer extends Component {
       { value: 'income', label: 'Příjmy' },
       { value: 'expense', label: 'Výdaje' }
     ],
+    displayNum: 25,
+    displayNumBase: 25
   };
-
-  componentDidMount() {
-    this.reloadTransactions();
-  }
-
-  reloadTransactions(){
-    axios.get('/transactions').then(response => {
-      this.setState({ transactions: response.data.map(transaction => ({ ...transaction, isFocused: false })) });
-    });
-  }
-
-  calculateTotal = (array) =>  array.reduce((sum, transaction) => {
-    const sign = transaction.type === "income" ? 1 : -1;
-    return sum + sign * transaction.value;
-  }, 0);
 
   openModalAddTransaction = () => (this.setState({ modalAddTransactionIsOpen: true }));
   closeModalAddTransaction = () => (this.setState({ modalAddTransactionIsOpen: false }));
@@ -59,6 +46,15 @@ class TransactionsContainer extends Component {
 
   handleFilterChange = (option) => {
     this.setState(prevState => ({ filters: { ...prevState.filters, type: { ...option } } }));
+    this.resetDisplayNum();
+  };
+
+  handleLoadMore = () => {
+    this.setState(prevState => ({displayNum: prevState.displayNum + prevState.displayNumBase}));
+  };
+
+  resetDisplayNum = () => {
+    this.setState({displayNum: this.state.displayNumBase});
   };
 
   addTransaction = (transaction) => {
@@ -66,13 +62,13 @@ class TransactionsContainer extends Component {
       name: transaction.name,
       value: transaction.value,
       type: transaction.type,
+      created: moment().valueOf(),
       id: moment().valueOf(),
-      created: moment().valueOf()
     };
 
     axios.post('/transactions', transactionCopy).then(response => {
+      this.props.reloadTransactions();
       this.setState((prevState) => ({
-        transactions: [response.data, ...prevState.transactions],
         modalTransaction: emptyModalTransaction,
         filters: {...prevState.filters, type: transactionCopy.type === prevState.filters.type.value ? prevState.filters.type : prevState.typeOptions[0]}
       }), this.closeModalAddTransaction);
@@ -82,7 +78,7 @@ class TransactionsContainer extends Component {
   deleteTransaction = (transaction) => {
     const id= transaction.id;
     axios.delete("/transactions/" + id).then(response => {
-      this.reloadTransactions();
+      this.props.reloadTransactions();
     });
   };
 
@@ -93,28 +89,22 @@ class TransactionsContainer extends Component {
 
     const id= transaction.id;
     axios.put("/transactions/" + id, editedTrans).then(response => {
-      this.reloadTransactions();
+      this.props.reloadTransactions();
       this.closeModalEditTransaction();
     });
   };
 
-  focusTransaction = (id) => {
-    this.setState((prevState) => ({
-      transactions: prevState.transactions.map(transaction => ({
-        ...transaction,
-        isFocused: id === transaction.id
-      }))
-    }));
-  };
+
 
   render() {
-    const { transactions, data, filters } = this.state;
+    const { data, filters } = this.state;
+    const {transactions, focusTransaction} = this.props;
 
     const filterOut = filters.type.value === "income" ? "expense" : (filters.type.value === "expense" ? "income" : "all");
     const filteredTransactions = transactions.filter(item => item.type !== filterOut);
 
     const sortedTransactions = filteredTransactions.sort(
-      (a, b) => a.id < b.id ? 1 : (a.id > b.id ? -1 : 0)
+      (a, b) => a.created < b.created ? 1 : (a.created > b.created ? -1 : 0)
     );
 
     return (
@@ -125,11 +115,12 @@ class TransactionsContainer extends Component {
           onFiltersChange={this.handleFilterChange}
           onDeleteTransactionClick={this.deleteTransaction}
           onEditTransactionClick={this.openModalEditTransaction}
-          onFocusTransactionClick={this.focusTransaction}
+          onFocusTransactionClick={focusTransaction}
           onNewTransactionClick={this.openModalAddTransaction}
+          onLoadMoreClicked={this.handleLoadMore}
+          displayNum={this.state.displayNum}
           typeOption={this.state.filters.type}
           typeOptions={this.state.typeOptions}
-          total={this.calculateTotal(sortedTransactions)}
         />
         <TransactionModalContainer
           isOpen={this.state.modalAddTransactionIsOpen}
@@ -158,4 +149,4 @@ class TransactionsContainer extends Component {
   }
 }
 
-export default TransactionsContainer;
+export default withTransactions(TransactionsContainer);

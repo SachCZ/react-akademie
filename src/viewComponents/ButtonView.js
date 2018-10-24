@@ -5,7 +5,6 @@ const ButtonView = styled.button`
     cursor: pointer;
     color: white;
     width: 100%;
-    height: 100%;
     border: 0;
     ${constants.darkerShadow}
     ${props => {

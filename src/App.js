@@ -12,12 +12,14 @@ import OverviewPage from "./pages/OverviewPage";
 import MainImageSrc from "./images/main_image.jpg";
 import LogoFontSrc from "./fonts/WorkSans-ExtraLight.ttf";
 import ButtonsFontSrc from "./fonts/WorkSans-Regular.ttf";
-import axios from 'axios';
+import { MdFormatLineSpacing, MdEqualizer } from "react-icons/md";
+import moment from "moment";
+import "moment/locale/cs";
+
+moment.locale('cs');
+
 
 //TODO add close button to modal
-//TODO make inputs more clickable
-//TODO make swicth based on select - for few items its better than select dropdown
-//TODO make buttons shaddow to be a little bit lifted and more clickable
 
 Modal.setAppElement("#root");
 
@@ -48,32 +50,30 @@ const MainBar = styled.nav`
     ${constants.darkerShadow};
     border-bottom: 1px solid ${constants.darkGrey};
     z-index: 2;
+    overflow: hidden; 
 `;
-
+//TODO this is broken, should not be overflow hidden
 const MainBarLink = styled(Link)`
     display: block;
     border: 0;
     border-right: 1px solid ${constants.darkGrey};
     text-align: center;
     height: 100%;
-    width: 100%;
+    flex: 0 0 220px;
+    @media (max-width: 500px) {
+      flex: 0 0 70px;
+    }
     line-height: 50px;
     text-decoration: none;
     color: white;
     font-family: ButtonFont;
 `;
 
-const FooterLayout = styled(InnerLayout)`
-  background-color: ${constants.darkGrey};
-`;
-
-const MainImageContainer = styled(InnerLayout)`
+const MainImageContainer = styled(OuterLayout)`
   ${constants.darkerShadow};
   border-bottom: 1px solid ${constants.darkGrey};
-  font-family: LogoFont, sans-serif;
-  font-size: 3.5vw;
-  color: white;
-  line-height: 15vw;
+  flex: 0 0 15vw;
+  min-height: 80px;
   padding-left: 10%;
   position: relative;
   &:before {
@@ -87,18 +87,49 @@ const MainImageContainer = styled(InnerLayout)`
     z-index: -2;
     opacity: 1;
   }
-  &:after {
-    content: "";
-    background-image: url(${MainImageSrc});
-    background-position: center;
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
+  @media (min-width: 800px) {
+    &:after {
+      content: "";
+      background-image: url(${MainImageSrc});
+      background-position: center;
+      opacity: 0.5;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+     }
    }
+`;
+
+const MainText = styled.span`
+  font-family: LogoFont, sans-serif;
+  font-size: 3.5vw;
+  @media (max-width: 800px) {
+    font-size: 27px;
+  }
+  color: white;
+`;
+
+const MainBarLinkText = styled.span`
+  @media (max-width: 500px) {
+    display: none;
+  }
+`;
+
+const TransactionsIcon = styled(MdFormatLineSpacing)`
+  vertical-align: middle;
+  padding-bottom: 2px;
+  font-size: 25px;
+  margin-right: 5px;
+`;
+
+const OverviewIcon = styled(MdEqualizer)`
+  vertical-align: middle;
+  padding-bottom: 4px;
+  font-size: 25px;
+  margin-right: 5px;
 `;
 
 const App = () => (
@@ -107,13 +138,13 @@ const App = () => (
       <InnerLayout flex="0 0 50px;">
         <MainBar>
           <OuterLayout>
-            <InnerLayout flex="0 0 200px"><MainBarLink to="/">Všechny transakce</MainBarLink></InnerLayout>
-            <InnerLayout flex="0 0 200px"><MainBarLink to="/Overview">Přehled</MainBarLink></InnerLayout>
+            <MainBarLink to="/"><TransactionsIcon/><MainBarLinkText>Transakce</MainBarLinkText></MainBarLink>
+            <MainBarLink to="/Overview"><OverviewIcon/><MainBarLinkText>Přehled</MainBarLinkText></MainBarLink>
           </OuterLayout>
         </MainBar>
       </InnerLayout>
-      <MainImageContainer flex="0 0 15vw;">
-        VŠECHNY TRANSAKCE
+      <MainImageContainer direction="column" justify="center">
+        <MainText>VŠECHNY TRANSAKCE</MainText>
       </MainImageContainer>
     </OuterLayout>
   )} content={(
@@ -122,11 +153,8 @@ const App = () => (
       <Route path="/" exact component={TransactionsPage}/>
       <Route render={() => <p>Not found</p>}/>
     </Switch>
-  )} footer={(
-    <OuterLayout direction="column" align="stretch">
-      <FooterLayout flex="0 0 300px;"></FooterLayout>
-    </OuterLayout>
-  )}/>
+  )}
+  />
 );
 
 export default App;

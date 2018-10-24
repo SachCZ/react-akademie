@@ -7,12 +7,11 @@ const Layout = styled(OuterLayout)`
   min-width: 350px;
 `;
 
-const PageLayout = ({header, content, footer}) => {
+const PageLayout = ({header, content}) => {
   return (
     <Layout align="stretch" direction="column">
       <InnerLayout>{header}</InnerLayout>
       <InnerLayout>{content}</InnerLayout>
-      <InnerLayout>{footer}</InnerLayout>
     </Layout>
   );
 };

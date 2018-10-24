@@ -8,7 +8,6 @@ const Layout = styled.div`
   flex: 1;
   align-items: ${({align}) => align};
   justify-content: ${({justify}) => justify};
-  padding: ${({padding}) => padding};
 
   
   ${({wrap, marginBetween, direction}) => {
@@ -47,6 +46,7 @@ const Layout = styled.div`
       }      
     }
   }}
+  padding: ${({padding}) => padding && padding};
   flex-wrap: ${({wrap}) => wrap ? "wrap" : "nowrap"};
 `;
 
@@ -66,7 +66,6 @@ OuterLayout.defaultProps = {
   direction: "row",
   align: "flex-start",
   justify: "flex-start",
-  padding: "0"
 };
 
 export default OuterLayout;
