@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import TransactionView from "./TransactionView";
 import styled from "styled-components";
 import constants from "../Constants";
@@ -65,7 +65,7 @@ const Transactions = styled(LoadableListView)`
   ${constants.darkerShadow}
 `;
 
-class TransactionsView extends PureComponent {
+class TransactionsView extends Component {
 
   render() {
     const {

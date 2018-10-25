@@ -10,6 +10,7 @@ const Button = styled(ButtonView)`
   flex: 1;
   margin: 1.5px; 
   ${({buttonStyle}) => buttonStyle}
+  ${({dontDisplay}) => dontDisplay && "display: none;"}
 `;
 
 const Layout = styled.div`
@@ -25,6 +26,7 @@ const InlineSelectView = ({selectedOption, onChange, options, className, buttonS
                 selected={selectedOption.value === option.value}
                 onClick={(e) => {e.preventDefault(); return onChange(option); }}
                 secondary={selectedOption.value !== option.value}
+                dontDisplay={option.value === "empty"}
         >
           {option.label}
         </Button>))

@@ -65,7 +65,7 @@ class TransactionsContainer extends Component {
       this.props.reloadTransactions();
       this.setState((prevState) => ({
         modalTransaction: emptyModalTransaction,
-        filters: {...prevState.filters, type: transactionCopy.type === prevState.filters.type.value ? prevState.filters.type : prevState.typeOptions[0]}
+        filters: {...prevState.filters, type: transactionCopy.type === prevState.filters.type.value ? prevState.filters.type : this.props.typeOptions[0]}
       }), this.closeModalAddTransaction);
     });
   };
@@ -79,7 +79,11 @@ class TransactionsContainer extends Component {
 
   editTransaction = (transaction) => {
     const editedTrans = {
-      ...transaction
+      name: transaction.name,
+      value: transaction.value,
+      type: transaction.type,
+      created: transaction.created,
+      id: transaction.id
     };
 
     const id= transaction.id;

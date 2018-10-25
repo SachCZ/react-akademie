@@ -48,13 +48,13 @@ const Circle = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: ${constants.baseColor}
 `;
 
 const CircleText = styled.div`
   text-align: center;
   font-weight: bold;
   font-size: 30px;
-  color: white;
 `;
 
 const DateDisplay = styled(CircleText)`
@@ -78,25 +78,65 @@ const OverviewView = ({ day, dayTotal, month, monthTotal, total, typeOption, onT
                  reset={reset}
 
         />
-        <Card>
-          <Circle>
-            <DateDisplay>{month.format("MMMM YYYY")}</DateDisplay>
-            <CircleText>{monthTotal} Kč</CircleText>
-          </Circle>
-        </Card>
-        <Card>
-          <Circle>
-            <DateDisplay>Dnes</DateDisplay>
-            <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
-            <CircleText>{dayTotal} Kč</CircleText>
-          </Circle>
-        </Card>
-        <Card>
-          <Circle>
-            <DateDisplay>Celkem</DateDisplay>
-            <CircleText>{total} Kč</CircleText>
-          </Circle>
-        </Card>
+        {monthOption.value === "empty" &&
+          <Card>
+            <Circle type={typeOption.value}>
+              {
+                typeOption.value === "all" &&
+                <DateDisplay>Celková bilance</DateDisplay>
+              }
+              {
+                typeOption.value === "income" &&
+                <DateDisplay>Celkové příjmy</DateDisplay>
+              }
+              {
+                typeOption.value === "expense" &&
+                <DateDisplay>Celkové výdaje</DateDisplay>
+              }
+              <CircleText>{total > 0 && "+" }{total} Kč</CircleText>
+            </Circle>
+          </Card>
+        }
+        {monthOption.value !== "empty" &&
+          <Card>
+            <Circle type={typeOption.value}>
+              {
+                typeOption.value === "all" &&
+                <DateDisplay>Celková bilance</DateDisplay>
+              }
+              {
+                typeOption.value === "income" &&
+                <DateDisplay>Příjmy za</DateDisplay>
+              }
+              {
+                typeOption.value === "expense" &&
+                <DateDisplay>Výdaje za</DateDisplay>
+              }
+              <DateDisplay>{month.format("MMMM YYYY")}</DateDisplay>
+              <CircleText>{monthTotal > 0 && "+" }{monthTotal} Kč</CircleText>
+            </Circle>
+          </Card>
+        }
+        {monthOption.value === "empty" &&
+          <Card>
+            <Circle type={typeOption.value}>
+              {
+                typeOption.value === "all" &&
+                <DateDisplay>Celková bilance dne</DateDisplay>
+              }
+              {
+                typeOption.value === "income" &&
+                <DateDisplay>Příjmy dne</DateDisplay>
+              }
+              {
+                typeOption.value === "expense" &&
+                <DateDisplay>Výdaje dne</DateDisplay>
+              }
+              <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
+              <CircleText>{dayTotal > 0 && "+" }{dayTotal} Kč</CircleText>
+            </Circle>
+          </Card>
+        }
       </Container>
     </Layout>
   );

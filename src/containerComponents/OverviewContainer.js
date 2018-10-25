@@ -16,6 +16,7 @@ const monthOptions = [
   {value: 9, label: "Říjen"},
   {value: 10, label: "Listopad"},
   {value: 11, label: "Prosince"},
+  {value: "empty", label: ""},
 
 ];
 
@@ -24,7 +25,7 @@ class OverviewContainer extends Component {
     day: moment(),
     month: moment(),
     selectedType: this.props.typeOptions[0],
-    selectedMonth: monthOptions[moment().month()]
+    selectedMonth: monthOptions[monthOptions.length - 1]
   };
 
   getDayTotal(transactions, day){
@@ -59,14 +60,13 @@ class OverviewContainer extends Component {
   };
 
   handleMonthChange = (option) => {
-    this.setState({ selectedMonth: {...option}, month: moment().month(option.value)});
+    this.setState({ selectedMonth: {...option}, month: option.value !== "empty" ? moment().month(option.value) : moment()});
   };
 
   resetOptions = () => {
-    const currentMoment = moment();
-    this.handleMonthChange(monthOptions[currentMoment.month()]);
+    this.handleMonthChange(monthOptions[monthOptions.length - 1]);
     this.handleTypeChange(this.props.typeOptions[0])
-  }
+  };
 
   render() {
     const {transactions, typeOptions} = this.props;

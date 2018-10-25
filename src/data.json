@@ -458,10 +458,23 @@
     {
       "name": "Hodinky",
       "value": "12000",
-      "type": "income",
+      "type": "expense",
       "created": 1540399027494,
-      "id": 1540399027495,
-      "isFocused": true
+      "id": 1540399027495
+    },
+    {
+      "name": "kapesné",
+      "value": "20000",
+      "type": "income",
+      "created": 1540474508897,
+      "id": 1540474508897
+    },
+    {
+      "name": "košile",
+      "value": "2000",
+      "type": "expense",
+      "created": 1540474546969,
+      "id": 1540474546969
     }
   ]
 }
