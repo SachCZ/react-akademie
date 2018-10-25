@@ -58,14 +58,14 @@ const EditButton = styled(MdModeEdit)`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
     margin: 0 10px 0 35px;
-    color: ${constants.grey};
+    color: ${constants.secondaryColor};
     cursor: pointer;
 `;
 
 const DeleteButton = styled(MdDelete)`
     width: ${buttonSize}px;
     height: ${buttonSize}px;
-    color: ${constants.grey};
+    color: ${constants.secondaryColor};
     margin: 0 15px 0 10px;
     cursor: pointer;
 `;

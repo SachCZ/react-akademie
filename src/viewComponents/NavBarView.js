@@ -6,12 +6,13 @@ import React from "react";
 
 const Bar = styled.div`
   display: flex;
-  background-color: ${constants.primaryColor};
+  background-color: ${constants.secondaryColor};
   width: 100%;
   height: ${constants.navHeight};
   ${constants.darkerShadow};
   border-bottom: 1px solid ${constants.darkGrey};
   z-index: 2;
+  ${constants.primaryStyling}
 `;
 
 const BarLink = styled(Link)`

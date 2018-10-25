@@ -1,10 +1,14 @@
 const lightGrey = "#DDDDDD";
 const darkGrey = "#444444";
 const baseColor = "white";
+const secondaryColor = "#336B87";
+const secondaryColorLight = "#3ca9ca";
+const primaryColor = "#2c5c74";
+const primaryColorLight = "#4693b9";
 
 export default {
-  primaryColor: "#3d5861",
-  secondaryColor: "#755681",
+  primaryColor: primaryColor,
+  secondaryColor: secondaryColor,
   lightGrey: lightGrey,
   darkGrey: darkGrey,
   grey: "#767676",
@@ -23,27 +27,27 @@ export default {
     background:rgba(255,255,255,0.85);
   `,
   primaryStyling: `
-    background: #96a3a9;
-    background: -moz-linear-gradient(top, #96a3a9 0%, #3d5861 100%);
-    background: -webkit-linear-gradient(top, #96a3a9 0%,#3d5861 100%);
-    background: linear-gradient(to bottom, #96a3a9 0%,#3d5861 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96a3a9', endColorstr='#3d5861',GradientType=0 );
+    background: ${primaryColorLight};
+    background: -moz-linear-gradient(top, ${primaryColorLight} 0%, ${primaryColor} 100%);
+    background: -webkit-linear-gradient(top, ${primaryColorLight} 0%,${primaryColor} 100%);
+    background: linear-gradient(to bottom, ${primaryColorLight} 0%,${primaryColor} 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='${primaryColorLight}', endColorstr='${primaryColor}',GradientType=0 );
     font-family: ButtonFont;
     border-bottom: 1px solid ${darkGrey};
     color: ${baseColor};
     `,
   secondaryStyling: `
-    background: #aa8da1;
-    background: -moz-linear-gradient(top, #aa8da1 0%, #7b617d 100%);
-    background: -webkit-linear-gradient(top, #aa8da1 0%,#7b617d 100%);
-    background: linear-gradient(to bottom, #aa8da1 0%,#7b617d 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa8da1', endColorstr='#7b617d',GradientType=0 );
+    background: ${secondaryColorLight};
+    background: -moz-linear-gradient(top, ${secondaryColorLight} 0%, ${secondaryColor} 100%);
+    background: -webkit-linear-gradient(top, ${secondaryColorLight} 0%,${secondaryColor} 100%);
+    background: linear-gradient(to bottom, ${secondaryColorLight} 0%,${secondaryColor} 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='${secondaryColorLight}', endColorstr='${secondaryColor}',GradientType=0 );
     font-family: ButtonFont;
     border-bottom: 1px solid ${darkGrey};
     color: ${baseColor};
     `,
   navHeight: "50px",
-  mainImageHeight: "15vw",
+  mainImageHeight: "13vw",
   mainImageMinHeight: "80px",
   pageMinWidth: "350px",
   baseColor: baseColor,

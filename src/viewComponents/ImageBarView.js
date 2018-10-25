@@ -14,7 +14,12 @@ const Bar = styled.div`
   min-height: ${constants.mainImageMinHeight}
   padding-left: 10%;
   position: relative;
-  &:before {
+  background-color: ${constants.secondaryColor}
+  z-index: -1;
+`;
+
+/*
+&:before {
     background-color: ${constants.primaryColor};
     content: "";
     top: 0;
@@ -38,7 +43,7 @@ const Bar = styled.div`
       z-index: -1;
      }
    }
-`;
+ */
 
 const MainText = styled.span`
   font-family: LogoFont, sans-serif;

@@ -36,7 +36,7 @@ const SummaryView = ({ onTypeChange, typeOption, total, options, className, onNe
                         spaceTop="10px"
                         spaceBottom="10px" spaceBetween="10px">
 
-      <ButtonAdd secondary onClick={onNewTransactionClick}><AddIcon/>Nová transakce</ButtonAdd>
+      <ButtonAdd onClick={onNewTransactionClick}><AddIcon/>Nová transakce</ButtonAdd>
 
       <TypeSelect
         selectedOption={typeOption}

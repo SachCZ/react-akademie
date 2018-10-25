@@ -41,7 +41,7 @@ const ModalHeader = styled.h2`
   text-align: center;
   margin: 0;
   padding: 10px;
-  ${constants.primaryStyling};
+  ${constants.secondaryStyling};
 `;
 
 
@@ -64,6 +64,7 @@ const TransactionModal = (props)=> {
           <OuterLayout direction="column" align="stretch" padding="30px" marginBetween={15}>
             <InnerLayout>
               <InlineSelectView
+                buttonStyle="width: 100px; margin: 0;"
                 selectedOption={transaction.type}
                 onChange={onTypeChange}
                 options={typeOptions}

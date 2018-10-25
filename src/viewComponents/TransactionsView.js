@@ -13,7 +13,10 @@ const Layout = styled.div`
 
   position: relative;
   padding-top: 20px;
-  &:before {
+`;
+
+/*
+&:before {
     background-color: ${constants.primaryColor};
     opacity: 0.35;
     content: "";
@@ -35,10 +38,10 @@ const Layout = styled.div`
       bottom: 0;
       right: 0;
       position: absolute;
-      z-index: -1;   
+      z-index: -1;
      }
    }
-`;
+ */
 
 const Content = styled.div`
   flex: 1;

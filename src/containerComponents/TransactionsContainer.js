@@ -22,11 +22,6 @@ class TransactionsContainer extends Component {
     filters: {
       type: { value: "all", label: "Vše" }
     },
-    typeOptions: [
-      { value: 'all', label: 'Vše' },
-      { value: 'income', label: 'Příjmy' },
-      { value: 'expense', label: 'Výdaje' }
-    ],
     displayNum: 25,
     displayNumBase: 25
   };
@@ -97,8 +92,8 @@ class TransactionsContainer extends Component {
 
 
   render() {
-    const { data, filters } = this.state;
-    const {transactions, focusTransaction} = this.props;
+    const { filters } = this.state;
+    const {transactions, focusTransaction, typeOptions} = this.props;
 
     const filterOut = filters.type.value === "income" ? "expense" : (filters.type.value === "expense" ? "income" : "all");
     const filteredTransactions = transactions.filter(item => item.type !== filterOut);
@@ -111,7 +106,6 @@ class TransactionsContainer extends Component {
       <Fragment>
         <TransactionsView
           transactions={sortedTransactions}
-          transactionsRaw={data}
           onFiltersChange={this.handleFilterChange}
           onDeleteTransactionClick={this.deleteTransaction}
           onEditTransactionClick={this.openModalEditTransaction}
@@ -120,7 +114,7 @@ class TransactionsContainer extends Component {
           onLoadMoreClicked={this.handleLoadMore}
           displayNum={this.state.displayNum}
           typeOption={this.state.filters.type}
-          typeOptions={this.state.typeOptions}
+          typeOptions={typeOptions}
         />
         <TransactionModalContainer
           isOpen={this.state.modalAddTransactionIsOpen}

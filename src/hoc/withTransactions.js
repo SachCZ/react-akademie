@@ -4,7 +4,12 @@ import axios from "../util/axios";
 const WithTransactions = (WrappedComponent) => {
   class Wrapper extends Component {
     state = {
-      transactions: []
+      transactions: [],
+      typeOptions: [
+        { value: 'all', label: 'Vše' },
+        { value: 'income', label: 'Příjmy' },
+        { value: 'expense', label: 'Výdaje' }
+      ],
     };
 
     componentDidMount() {

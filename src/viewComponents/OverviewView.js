@@ -3,6 +3,8 @@ import styled from "styled-components";
 import OuterLayout from "../layoutComponents/OuterLayout";
 import InnerLayout from "../layoutComponents/InnerLayout";
 import constants from "../Constants";
+import OverviewOptionsView from "./OverviewOptionsView";
+import InlineSelectView from "./InlineSelectView";
 
 //TODO refactor this
 
@@ -21,6 +23,7 @@ const Container = styled(OuterLayout)`
   }
   max-width: 1010px;
   min-height: 100px;
+  padding-bottom: 100px;
 `;
 
 const Card = styled(InnerLayout)`
@@ -58,20 +61,34 @@ const DateDisplay = styled(CircleText)`
   font-size: 20px;
 `;
 
-const OverviewView = ({ day, dayTotal, month, monthTotal, total }) => {
+const Options = styled(OverviewOptionsView)`
+  width: 310px;
+  background-color: ${constants.baseColor}
+
+`;
+
+const OverviewView = ({ day, dayTotal, month, monthTotal, total, typeOption, onTypeChange, typeOptions, monthOption, onMonthChange, monthOptions, reset }) => {
   return (
     <Layout>
       <Container wrap="wrap" marginBetween={20}>
-        <Card>
-          <Circle>
-            <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
-            <CircleText>{dayTotal} Kč</CircleText>
-          </Circle>
-        </Card>
+        <Options typeOption={typeOption}
+                 onTypeChange={onTypeChange}
+                 typeOptions={typeOptions}
+                 monthOption={monthOption} onMonthChange={onMonthChange} monthOptions={monthOptions}
+                 reset={reset}
+
+        />
         <Card>
           <Circle>
             <DateDisplay>{month.format("MMMM YYYY")}</DateDisplay>
             <CircleText>{monthTotal} Kč</CircleText>
+          </Circle>
+        </Card>
+        <Card>
+          <Circle>
+            <DateDisplay>Dnes</DateDisplay>
+            <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
+            <CircleText>{dayTotal} Kč</CircleText>
           </Circle>
         </Card>
         <Card>

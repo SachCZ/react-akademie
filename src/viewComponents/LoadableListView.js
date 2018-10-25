@@ -39,7 +39,7 @@ const LoadableListView = ({displayNum, onLoadMoreClicked, children, className}) 
       {displayNum < children.length ?
         <InnerLayout flex="0 0 auto">
           <OuterLayout justify="center">
-            <InnerLayout flex="0 0 300px"><ButtonView secondary onClick={onLoadMoreClicked}>Načíst další <LoadIcon/></ButtonView></InnerLayout>
+            <InnerLayout flex="0 0 300px"><ButtonView onClick={onLoadMoreClicked}>Načíst další <LoadIcon/></ButtonView></InnerLayout>
           </OuterLayout>
         </InnerLayout>
         :
