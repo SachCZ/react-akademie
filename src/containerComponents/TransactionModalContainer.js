@@ -7,7 +7,7 @@ const typeOptions = [
 ];
 
 const TransactionModalForm = (props) => {
-  const {transaction, onChange, onSubmit} = props;
+  const {transaction, onChange, onSubmit, onRequestClose} = props;
 
   const handleInputChange = (event) => {
     const target = event.target;
@@ -36,7 +36,7 @@ const TransactionModalForm = (props) => {
   };
 
   return (
-    <TransactionModalView {...props} onTypeChange={handleTypeChange}  typeOptions={typeOptions} transaction={transaction} onChange={handleInputChange} onSubmit={handleSubmit}/>
+    <TransactionModalView {...props} onTypeChange={handleTypeChange} onRequestClose={onRequestClose} typeOptions={typeOptions} transaction={transaction} onChange={handleInputChange} onSubmit={handleSubmit}/>
   );
 
 };

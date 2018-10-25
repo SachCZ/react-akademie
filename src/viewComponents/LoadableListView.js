@@ -30,7 +30,7 @@ const LoadableListView = ({displayNum, onLoadMoreClicked, children, className}) 
   const items = children.slice(0, displayNum);
 
   return (
-    <Layout className={className} direction="column" align="stretch" marginBetween={20} padding="0 0 60px 0">
+    <Layout className={className} direction="column" align="stretch" marginBetween={20} padding="0 0 110px 0">
       <InnerLayout flex="0 0 auto">
         <OuterLayout direction="column" align="stretch">
           {items.map((item, index) => <InnerLayout key={index}>{item}</InnerLayout>)}

@@ -5,6 +5,8 @@ import constants from "../Constants";
 import BackgroundImageSrc from "../images/clouds.jpg";
 import SummaryView from "./SummaryView";
 import LoadableListView from "./LoadableListView";
+import SnackbarView from "./SnackbarView";
+import ButtonView from "./ButtonView";
 
 const Layout = styled.div`
   display: flex;
@@ -14,34 +16,6 @@ const Layout = styled.div`
   position: relative;
   padding-top: 20px;
 `;
-
-/*
-&:before {
-    background-color: ${constants.primaryColor};
-    opacity: 0.35;
-    content: "";
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -2;
-  }
-  @media (min-width: 800px) {
-    &:after {
-      content: "";
-      background-size: cover;
-      background: url(${BackgroundImageSrc}) no-repeat fixed center;
-      opacity: 0.4;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      position: absolute;
-      z-index: -1;
-     }
-   }
- */
 
 const Content = styled.div`
   flex: 1;
@@ -65,6 +39,33 @@ const Transactions = styled(LoadableListView)`
   ${constants.darkerShadow}
 `;
 
+const Snackbar = styled(SnackbarView)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  flex: 1 1 0;
+  max-width: 500px;
+  min-width: ${constants.pageMinWidth};
+  flex-wrap: wrap;
+  opacity: 0.85;
+`;
+
+const RedoLine = styled.span`
+  font-style: italic;
+  min-width: 250px;
+  margin-right: auto;
+`;
+
+const RedoTransaction = styled.span`
+  
+`;
+
+const RedoButton = styled(ButtonView)`
+  padding: 3px;
+  width: 150px;
+`;
+
 class TransactionsView extends Component {
 
   render() {
@@ -79,7 +80,10 @@ class TransactionsView extends Component {
       total,
       typeOptions,
       displayNum,
-      onLoadMoreClicked
+      onLoadMoreClicked,
+      redoSnackbarIsOpen,
+      deletedTransaction,
+      redoDeleteTransaction
     } = this.props;
 
     return (
@@ -101,6 +105,16 @@ class TransactionsView extends Component {
               />;
             })}
           </Transactions>
+          <Snackbar isOpen={redoSnackbarIsOpen}>
+            {deletedTransaction && deletedTransaction.name &&
+            [
+              <RedoLine key="line">Smazáno: <RedoTransaction>
+                {deletedTransaction.name.charAt(0).toUpperCase() + deletedTransaction.name.slice(1).toLowerCase()}:
+                {deletedTransaction.type === "income" ? " +" : " -"}{deletedTransaction.value} Kč</RedoTransaction></RedoLine>,
+              <RedoButton key="button" onClick={redoDeleteTransaction}>Vrátit zpět?</RedoButton>
+            ]
+            }
+          </Snackbar>
         </Content>
       </Layout>
     );

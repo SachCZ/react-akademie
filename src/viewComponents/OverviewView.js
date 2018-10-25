@@ -122,7 +122,7 @@ const OverviewView = ({ day, dayTotal, month, monthTotal, total, typeOption, onT
             <Circle type={typeOption.value}>
               {
                 typeOption.value === "all" &&
-                <DateDisplay>Celková bilance dne</DateDisplay>
+                <DateDisplay>Celková bilance dnes</DateDisplay>
               }
               {
                 typeOption.value === "income" &&

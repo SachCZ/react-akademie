@@ -51,8 +51,8 @@ export default {
   mainImageMinHeight: "80px",
   pageMinWidth: "350px",
   baseColor: baseColor,
-  incomeColor: "",
-  expenseColor: "",
+  incomeColor: "green",
+  expenseColor: "red",
   incomeColorLight: "#96ffb8",
   expenseColorLight: "#ff979c"
 };

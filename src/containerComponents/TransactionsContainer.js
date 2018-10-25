@@ -4,6 +4,7 @@ import moment from "moment";
 import TransactionsView from "../viewComponents/TransactionsView";
 import axios from '../util/axios';
 import withTransactions from "../hoc/withTransactions";
+import SnackbarView from "../viewComponents/SnackbarView";
 
 const emptyModalTransaction = {
   name: "",
@@ -23,11 +24,23 @@ class TransactionsContainer extends Component {
       type: { value: "all", label: "Vše" }
     },
     displayNum: 25,
-    displayNumBase: 25
+    displayNumBase: 25,
+    redoSnackbarIsOpen: false,
+    deletedTransaction: {}
   };
 
-  openModalAddTransaction = () => (this.setState({ modalAddTransactionIsOpen: true }));
+  resetModal = () => {
+    this.setState({modalTransaction: emptyModalTransaction});
+  };
+
+  openModalAddTransaction = () => {
+    this.resetModal();
+    this.setState({ modalAddTransactionIsOpen: true });
+    this.closeRedoSnackbar();
+  };
   closeModalAddTransaction = () => (this.setState({ modalAddTransactionIsOpen: false }));
+
+
 
   openModalEditTransaction = (transaction) => {
     const type = transaction.type === "income" ? { value: 'income', label: 'Příjem' } : { value: 'expense', label: 'Výdaj' };
@@ -36,16 +49,19 @@ class TransactionsContainer extends Component {
 
     this.setState({ modalTransaction: newTransaction });
     this.setState({ modalEditTransactionIsOpen: true });
+    this.closeRedoSnackbar();
   };
   closeModalEditTransaction = () => (this.setState({ modalEditTransactionIsOpen: false }));
 
   handleFilterChange = (option) => {
     this.setState(prevState => ({ filters: { ...prevState.filters, type: { ...option } } }));
     this.resetDisplayNum();
+    this.closeRedoSnackbar();
   };
 
   handleLoadMore = () => {
     this.setState(prevState => ({displayNum: prevState.displayNum + prevState.displayNumBase}));
+    this.closeRedoSnackbar();
   };
 
   resetDisplayNum = () => {
@@ -57,7 +73,7 @@ class TransactionsContainer extends Component {
       name: transaction.name,
       value: transaction.value,
       type: transaction.type,
-      created: moment().valueOf(),
+      created: transaction.created ? transaction.created : moment().valueOf(),
       id: moment().valueOf(),
     };
 
@@ -74,7 +90,17 @@ class TransactionsContainer extends Component {
     const id= transaction.id;
     axios.delete("/transactions/" + id).then(response => {
       this.props.reloadTransactions();
+      this.setState({deletedTransaction: {...transaction}});
+      this.openRedoSnackbar();
     });
+  };
+
+  openRedoSnackbar = () => {
+    this.setState({redoSnackbarIsOpen: true});
+  };
+
+  closeRedoSnackbar = () => {
+    this.setState({redoSnackbarIsOpen: false});
   };
 
   editTransaction = (transaction) => {
@@ -91,6 +117,11 @@ class TransactionsContainer extends Component {
       this.props.reloadTransactions();
       this.closeModalEditTransaction();
     });
+  };
+
+  redoDeleteTransaction = () => {
+    this.addTransaction(this.state.deletedTransaction);
+    this.closeRedoSnackbar();
   };
 
 
@@ -119,6 +150,9 @@ class TransactionsContainer extends Component {
           displayNum={this.state.displayNum}
           typeOption={this.state.filters.type}
           typeOptions={typeOptions}
+          redoSnackbarIsOpen={this.state.redoSnackbarIsOpen}
+          deletedTransaction={this.state.deletedTransaction}
+          redoDeleteTransaction={this.redoDeleteTransaction}
         />
         <TransactionModalContainer
           isOpen={this.state.modalAddTransactionIsOpen}

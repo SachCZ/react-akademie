@@ -6,7 +6,7 @@ import styled from "styled-components"
 import WrappingLayout from "../layoutComponents/WrappingLayout";
 
 const Button = styled(ButtonView)`
-  opacity: ${({selected}) => selected ? "1" : "0.7" };
+  opacity: ${({selected}) => selected ? "1" : "0.5" };
   flex: 1;
   margin: 1.5px; 
   ${({buttonStyle}) => buttonStyle}

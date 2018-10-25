@@ -8,12 +8,12 @@ import ExpanderView from "./ExpanderView";
 const TransactionWrapper = styled.div`
     min-width: ${constants.pageMinWidth};
     display: flex;
-    background-color: ${({isFocused}) => isFocused ? "rgba(117, 86, 129, 0.1)" : "transparent"};
+    background-color: ${({isFocused}) => isFocused ? "rgba(70, 147, 185, 0.2)" : "transparent"};
     align-items: stretch;
     height: 65px;
     width: 100%;
     ${constants.thinBottomBorder}
-    cursor: ${({isFocused}) => isFocused ? "default" : "pointer"}
+    cursor: ${({isFocused}) => isFocused ? "default" : "pointer"};
 `;
 
 const TransactionInfo = styled.section`
@@ -42,7 +42,7 @@ const TransactionValue = styled.section`
     justify-content: center;
 `;
 const Value = styled.span`
-    color: ${({type}) => type === "income" ? "black" : "red"};
+    color: ${({type}) => type === "income" ? constants.incomeColor : constants.expenseColor};
 `;
 const TransactionMenu = styled(ExpanderView)`
     flex: 10;

@@ -5,8 +5,10 @@ import styled from "styled-components";
 import InputField from "./InputFieldView";
 import OuterLayout from "../layoutComponents/OuterLayout";
 import InnerLayout from "../layoutComponents/InnerLayout";
-import constants from "../Constants"
+import constants from "../Constants";
 import InlineSelectView from "./InlineSelectView";
+import { MdClose } from "react-icons/md";
+
 
 //TODO refactor this
 
@@ -40,17 +42,30 @@ const ModalWrapper = styled.div`
 const ModalHeader = styled.h2`
   text-align: center;
   margin: 0;
-  padding: 10px;
   ${constants.secondaryStyling};
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  position: relative;
 `;
 
+const HeaderLabel = styled.span`
+  line-height: 30px;
+  flex: 0 0 50%;
+`;
 
+const HeaderClose = styled(MdClose)`
+  height: 30px;
+  font-size: 30px;
+  flex: 0 0 auto;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+`;
 
-
-
-const TransactionModal = (props)=> {
-  const {transaction, onSubmit, onChange, onTypeChange, buttonText, label, typeOptions} = props;
-  const {name, value} = transaction;
+const TransactionModal = (props) => {
+  const { transaction, onSubmit, onChange, onTypeChange, buttonText, label, typeOptions, onRequestClose } = props;
+  const { name, value } = transaction;
 
   return (
     <Modal
@@ -59,8 +74,8 @@ const TransactionModal = (props)=> {
       contentLabel={label}
     >
       <ModalWrapper>
-        <ModalHeader>{label}</ModalHeader>
-        <form onSubmit={onSubmit}>
+        <ModalHeader><HeaderLabel>{label}</HeaderLabel><HeaderClose onClick={onRequestClose}/></ModalHeader>
+        <form onSubmit={onSubmit} autoComplete="off">
           <OuterLayout direction="column" align="stretch" padding="30px" marginBetween={15}>
             <InnerLayout>
               <InlineSelectView
@@ -73,13 +88,21 @@ const TransactionModal = (props)=> {
             <InnerLayout>
               <OuterLayout direction="column" marginBetween={5} align="stretch">
                 <InnerLayout flex="0 0 1em"><Label>Název</Label></InnerLayout>
-                <InnerLayout><InputField onChange={onChange} value={name} name="name" placeholder='např. "Nové boty"'/></InnerLayout>
+                <InnerLayout><InputField onChange={onChange} value={name} name="name"
+                                         placeholder={transaction.type.value === "income" ? "např. \"Výplata\"" : "např. \"Nové boty\""}/></InnerLayout>
               </OuterLayout>
             </InnerLayout>
             <InnerLayout>
-              <OuterLayout direction="column"  marginBetween={5} align="stretch">
+              <OuterLayout direction="column" marginBetween={5} align="stretch">
                 <InnerLayout flex="0 0 1em"><Label>Hodnota</Label></InnerLayout>
-                <InnerLayout><InputField onChange={onChange} value={value} name="value" placeholder='např. "1400"'/></InnerLayout>
+                <InnerLayout>
+                  <InputField
+                    onChange={onChange}
+                    value={value} name="value"
+                    placeholder={transaction.type.value === "income" ? "např. \"25000\"" : "např. \"1400\""}
+                    style={{color: transaction.type.value === "income" ? constants.incomeColor : constants.expenseColor}}
+                  />
+                </InnerLayout>
               </OuterLayout>
             </InnerLayout>
             <InnerLayout>
@@ -89,7 +112,7 @@ const TransactionModal = (props)=> {
         </form>
       </ModalWrapper>
     </Modal>
-  )
+  );
 };
 
 export default TransactionModal;

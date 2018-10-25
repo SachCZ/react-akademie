@@ -65,7 +65,6 @@ class OverviewContainer extends Component {
 
   resetOptions = () => {
     this.handleMonthChange(monthOptions[monthOptions.length - 1]);
-    this.handleTypeChange(this.props.typeOptions[0])
   };
 
   render() {

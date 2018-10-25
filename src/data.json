@@ -8,20 +8,6 @@
       "id": 1487911188000
     },
     {
-      "name": "non aute",
-      "type": "income",
-      "value": 902,
-      "created": 1522370056000,
-      "id": 1522370056000
-    },
-    {
-      "name": "consectetur fugiat",
-      "type": "expense",
-      "value": 338,
-      "created": 1495252405000,
-      "id": 1495252405000
-    },
-    {
       "name": "aliqua officia",
       "type": "income",
       "value": 57,
@@ -50,27 +36,6 @@
       "id": 1499834096000
     },
     {
-      "name": "minim consectetur",
-      "type": "income",
-      "value": 688,
-      "created": 1512196865000,
-      "id": 1512196865000
-    },
-    {
-      "name": "elit ex",
-      "type": "expense",
-      "value": 493,
-      "created": 1520275405000,
-      "id": 1520275405000
-    },
-    {
-      "name": "fugiat veniam",
-      "type": "expense",
-      "value": 402,
-      "created": 1511915278000,
-      "id": 1511915278000
-    },
-    {
       "name": "nulla duis",
       "type": "expense",
       "value": 906,
@@ -78,39 +43,11 @@
       "id": 1506654875000
     },
     {
-      "name": "do ut",
-      "type": "income",
-      "value": 83,
-      "created": 1483551886000,
-      "id": 1483551886000
-    },
-    {
       "name": "eu fugiat",
       "type": "income",
       "value": 671,
       "created": 1507503742000,
       "id": 1507503742000
-    },
-    {
-      "name": "dolore sint",
-      "type": "income",
-      "value": 872,
-      "created": 1509693681000,
-      "id": 1509693681000
-    },
-    {
-      "name": "nulla cillum",
-      "type": "income",
-      "value": 860,
-      "created": 1519621971000,
-      "id": 1519621971000
-    },
-    {
-      "name": "fugiat laboris",
-      "type": "income",
-      "value": 168,
-      "created": 1519003227000,
-      "id": 1519003227000
     },
     {
       "name": "elit sit",
@@ -127,32 +64,11 @@
       "id": 1503475506000
     },
     {
-      "name": "nostrud officia",
-      "type": "expense",
-      "value": 474,
-      "created": 1514394468000,
-      "id": 1514394468000
-    },
-    {
-      "name": "nostrud eiusmod",
-      "type": "expense",
-      "value": 915,
-      "created": 1498726808000,
-      "id": 1498726808000
-    },
-    {
       "name": "voluptate ea",
       "type": "income",
       "value": 889,
       "created": 1484446962000,
       "id": 1484446962000
-    },
-    {
-      "name": "incididunt laborum",
-      "type": "income",
-      "value": 460,
-      "created": 1518404994000,
-      "id": 1518404994000
     },
     {
       "name": "cillum Lorem",
@@ -162,20 +78,6 @@
       "id": 1492112856000
     },
     {
-      "name": "cupidatat cillum",
-      "type": "income",
-      "value": 538,
-      "created": 1512306912000,
-      "id": 1512306912000
-    },
-    {
-      "name": "et in",
-      "type": "expense",
-      "value": 41,
-      "created": 1519100479000,
-      "id": 1519100479000
-    },
-    {
       "name": "sunt sit",
       "type": "income",
       "value": 908,
@@ -183,25 +85,11 @@
       "id": 1501520993000
     },
     {
-      "name": "nostrud ut",
-      "type": "expense",
-      "value": 856,
-      "created": 1515068087000,
-      "id": 1515068087000
-    },
-    {
       "name": "sit culpa",
       "type": "income",
       "value": 143,
       "created": 1498335100000,
       "id": 1498335100000
-    },
-    {
-      "name": "adipisicing do",
-      "type": "expense",
-      "value": 899,
-      "created": 1514804965000,
-      "id": 1514804965000
     },
     {
       "name": "dolore irure",
@@ -239,13 +127,6 @@
       "id": 1488599434000
     },
     {
-      "name": "incididunt voluptate",
-      "type": "expense",
-      "value": 853,
-      "created": 1515311651000,
-      "id": 1515311651000
-    },
-    {
       "name": "eu ea",
       "type": "expense",
       "value": 774,
@@ -267,46 +148,11 @@
       "id": 1499737091000
     },
     {
-      "name": "officia aliquip",
-      "type": "expense",
-      "value": 633,
-      "created": 1517025111000,
-      "id": 1517025111000
-    },
-    {
-      "name": "incididunt sunt",
-      "type": "income",
-      "value": 326,
-      "created": 1504843649000,
-      "id": 1504843649000
-    },
-    {
       "name": "cupidatat proident",
       "type": "income",
       "value": 24,
       "created": 1496731064000,
       "id": 1496731064000
-    },
-    {
-      "name": "eiusmod excepteur",
-      "type": "income",
-      "value": 971,
-      "created": 1520369987000,
-      "id": 1520369987000
-    },
-    {
-      "name": "labore labore",
-      "type": "expense",
-      "value": 811,
-      "created": 1498736904000,
-      "id": 1498736904000
-    },
-    {
-      "name": "aliquip esse",
-      "type": "expense",
-      "value": 28,
-      "created": 1515316627000,
-      "id": 1515316627000
     },
     {
       "name": "veniam laborum",
@@ -365,39 +211,11 @@
       "id": 1490988159000
     },
     {
-      "name": "sunt mollit",
-      "type": "expense",
-      "value": 513,
-      "created": 1514398041000,
-      "id": 1514398041000
-    },
-    {
-      "name": "anim irure",
-      "type": "income",
-      "value": 720,
-      "created": 1505364643000,
-      "id": 1505364643000
-    },
-    {
       "name": "est consectetur",
       "type": "expense",
       "value": 386,
       "created": 1505270503000,
       "id": 1505270503000
-    },
-    {
-      "name": "nulla nulla",
-      "type": "expense",
-      "value": 134,
-      "created": 1518300397000,
-      "id": 1518300397000
-    },
-    {
-      "name": "occaecat occaecat",
-      "type": "income",
-      "value": 532,
-      "created": 1492847342000,
-      "id": 1492847342000
     },
     {
       "name": "ullamco tempor",
@@ -414,13 +232,6 @@
       "id": 1501241170000
     },
     {
-      "name": "minim ipsum",
-      "type": "income",
-      "value": 511,
-      "created": 1497144342000,
-      "id": 1497144342000
-    },
-    {
       "name": "nostrud eiusmod",
       "type": "expense",
       "value": 861,
@@ -428,53 +239,39 @@
       "id": 1490681852000
     },
     {
-      "name": "dolore minim",
+      "name": "incididunt sunt",
+      "value": 326,
       "type": "income",
-      "value": 455,
-      "created": 1515681054000,
-      "id": 1515681054000
+      "created": 1504843649000,
+      "id": 1540506856103
     },
     {
-      "value": 654,
-      "name": "asdf",
-      "type": "income",
-      "created": 1526406228489,
-      "id": 1522370056001
-    },
-    {
-      "value": 99999,
-      "name": "ahoj",
-      "type": "income",
-      "created": 1526406317360,
-      "id": 1522370056002
-    },
-    {
-      "name": "Boty",
-      "value": "1400",
-      "type": "income",
-      "created": 1540370614385,
-      "id": 1540370614385
-    },
-    {
-      "name": "Hodinky",
-      "value": "12000",
+      "name": "labore labore",
+      "value": 811,
       "type": "expense",
-      "created": 1540399027494,
-      "id": 1540399027495
+      "created": 1498736904000,
+      "id": 1540507139480
     },
     {
-      "name": "kapesné",
-      "value": "20000",
-      "type": "income",
-      "created": 1540474508897,
-      "id": 1540474508897
-    },
-    {
-      "name": "košile",
-      "value": "2000",
+      "name": "consectetur fugiat",
+      "value": 338,
       "type": "expense",
-      "created": 1540474546969,
-      "id": 1540474546969
+      "created": 1495252405000,
+      "id": 1540507426687
+    },
+    {
+      "name": "occaecat occaecat",
+      "value": 532,
+      "type": "income",
+      "created": 1492847342000,
+      "id": 1540507517351
+    },
+    {
+      "name": "elit ex",
+      "value": 493,
+      "type": "expense",
+      "created": 1520275405000,
+      "id": 1540507522596
     }
   ]
 }
