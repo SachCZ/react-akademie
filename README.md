@@ -6,7 +6,7 @@ This web app was developed during the React academy course lead by Inventi devel
 It relies on React and JSON-server. The purpose of this project is to develop a browser front-end aplication
 demonstrating the key capabilities of React taught in the mentioned academy.
 
-##Dependencies
+## Dependencies
 To be able to install and develop the app you will need Node.js version higher than 8.12.0
 and a corresponding package manager. You can use npm or yarn the choice is up to you.
 
