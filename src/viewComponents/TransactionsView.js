@@ -43,7 +43,7 @@ const Snackbar = styled(SnackbarView)`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 10px;
+  padding: 30px;
   flex: 1 1 0;
   max-width: 500px;
   min-width: ${constants.pageMinWidth};
@@ -83,7 +83,8 @@ class TransactionsView extends Component {
       onLoadMoreClicked,
       redoSnackbarIsOpen,
       deletedTransaction,
-      redoDeleteTransaction
+      redoDeleteTransaction,
+      onRedoSnackbarRequestClose
     } = this.props;
 
     return (
@@ -105,8 +106,8 @@ class TransactionsView extends Component {
               />;
             })}
           </Transactions>
-          <Snackbar isOpen={redoSnackbarIsOpen}>
-            {deletedTransaction && deletedTransaction.name &&
+          <Snackbar isOpen={redoSnackbarIsOpen} onRequestClose={onRedoSnackbarRequestClose}>
+            {deletedTransaction &&
             [
               <RedoLine key="line">Smazáno: <RedoTransaction>
                 {deletedTransaction.name.charAt(0).toUpperCase() + deletedTransaction.name.slice(1).toLowerCase()}:

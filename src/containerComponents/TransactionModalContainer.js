@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import TransactionModalView from "../viewComponents/TransactionModalView";
 
 const typeOptions = [
@@ -6,39 +6,43 @@ const typeOptions = [
   { value: 'expense', label: 'Výdaj' }
 ];
 
-const TransactionModalForm = (props) => {
-  const {transaction, onChange, onSubmit, onRequestClose} = props;
+class TransactionModalForm extends Component {
 
-  const handleInputChange = (event) => {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? (target.checked ? "income" : "expense") : target.value;
     const name = target.name;
-
-    const newTransactionCopy = { ...transaction };
+    const newTransactionCopy = { ...this.props.transaction };
     newTransactionCopy[name] = value;
-    onChange(newTransactionCopy);
+
+    this.props.onChange(newTransactionCopy);
   };
 
-  const handleTypeChange = (option) => {
-    const newTransactionCopy = { ...transaction };
+  handleTypeChange = (option) => {
+    const newTransactionCopy = { ...this.props.transaction };
     newTransactionCopy.type = option;
-    onChange(newTransactionCopy);
+    this.props.onChange(newTransactionCopy);
   };
 
-  const handleSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
 
-    const newTransactionCopy = { ...transaction };
-    newTransactionCopy.type = transaction.type.value;
+    const newTransactionCopy = { ...this.props.transaction };
+    newTransactionCopy.type = this.props.transaction.type.value;
 
-    onSubmit(newTransactionCopy);
+    this.props.onSubmit(newTransactionCopy);
   };
 
-  return (
-    <TransactionModalView {...props} onTypeChange={handleTypeChange} onRequestClose={onRequestClose} typeOptions={typeOptions} transaction={transaction} onChange={handleInputChange} onSubmit={handleSubmit}/>
-  );
+  render() {
+    const {transaction, onRequestClose, nameError, valueError} = this.props;
 
-};
+    return (
+      <TransactionModalView {...this.props} onTypeChange={this.handleTypeChange} onRequestClose={onRequestClose}
+                            typeOptions={typeOptions} transaction={transaction} onChange={this.handleInputChange}
+                            onSubmit={this.handleSubmit} valueError={valueError} nameError={nameError}/>
+    );
+  }
+}
 
 export default TransactionModalForm;

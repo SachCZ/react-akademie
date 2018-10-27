@@ -10,7 +10,7 @@ import InlineSelectView from "./InlineSelectView";
 
 const Layout = styled.div`
   display: flex;
-  justify-content center;
+  justify-content: center;
   width: 100%;
 `;
 const Container = styled(OuterLayout)`
@@ -126,11 +126,11 @@ const OverviewView = ({ day, dayTotal, month, monthTotal, total, typeOption, onT
               }
               {
                 typeOption.value === "income" &&
-                <DateDisplay>Příjmy dne</DateDisplay>
+                <DateDisplay>Příjmy dnes</DateDisplay>
               }
               {
                 typeOption.value === "expense" &&
-                <DateDisplay>Výdaje dne</DateDisplay>
+                <DateDisplay>Výdaje dnes</DateDisplay>
               }
               <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
               <CircleText>{dayTotal > 0 && "+" }{dayTotal} Kč</CircleText>

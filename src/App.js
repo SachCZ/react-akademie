@@ -8,15 +8,9 @@ import "moment/locale/cs";
 import BasePage from "./pages/BasePage";
 
 //TODO readme a aby to fungovalo, konzole čistá, errory hlavne npm install a npm start a server start
-//TODO tlacitko na zavirani
 //TODO when done remove todos :-D
-//TODO reset transaction modal when closed
 //TODO resolve images (probably just delete the comments)
-//TODO Matej nemohl najit prehled za vse
-//TODO Matej kdyz chtel pridat prijem tak klikal na vydaj
-//TODO Matej v prehledech ocenil klikaci mesice, ale kdyz hledal celkem tak to nemohl najit
-//TODO Matej v prehledech nepochopil co znamena vse
-//TODO
+//TODO Refactor code and remove coments
 
 moment.locale('cs');
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import constants from "../Constants";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { MdEqualizer, MdFormatLineSpacing } from "react-icons/md";
 import React from "react";
 
@@ -28,7 +28,25 @@ const BarLink = styled(Link)`
   line-height: ${constants.navHeight};
   text-decoration: none;
   color: white;
+  position: relative;
+  
   font-family: ButtonFont;
+  
+  ${({selected}) => (selected && `
+    background: none;
+    background-color: ${constants.secondaryColor};
+  
+    :after {
+    content: "";
+    position: absolute;
+    top: calc(${constants.navHeight} - 1px);
+    background-color: ${constants.secondaryColor};
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 15px;
+    }`)
+  }
 `;
 
 const BarLinkText = styled.span`
@@ -51,13 +69,13 @@ const OverviewIcon = styled(MdEqualizer)`
   margin-right: 5px;
 `;
 
-const NavBarView = () => {
+const NavBarView = ({location}) => {
   return (
     <Bar>
-      <BarLink to="/"><TransactionsIcon/><BarLinkText>Transakce</BarLinkText></BarLink>
-      <BarLink to="/Overview"><OverviewIcon/><BarLinkText>Přehled</BarLinkText></BarLink>
+      <BarLink selected={location.pathname==="/"} to="/"><TransactionsIcon/><BarLinkText>Transakce</BarLinkText></BarLink>
+      <BarLink selected={location.pathname==="/Overview"} to="/Overview"><OverviewIcon/><BarLinkText>Přehled</BarLinkText></BarLink>
     </Bar>
   );
 };
 
-export default NavBarView;
+export default withRouter(NavBarView);

@@ -6,7 +6,7 @@ const OverviewPage = () => {
 
   return (
     <Fragment>
-      <ImageBarView text="PŘEHLED"/>
+      <ImageBarView text="CELKOVÝ PŘEHLED"/>
       <OverviewContainer/>
     </Fragment>
   );

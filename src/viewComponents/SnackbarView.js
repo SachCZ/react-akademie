@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 import constants from "../Constants"
+import { MdClose } from "react-icons/md";
 
 const Snackbar = styled.div`
   width: 100%;
@@ -16,6 +17,17 @@ const Content = styled.div`
   height: 90px;
   background-color: ${constants.darkGrey};
   color: ${constants.baseColor};
+  position: relative;
+`;
+
+const CloseButton = styled(MdClose)`
+  height: 30px;
+  font-size: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  color: ${constants.baseColor}
 `;
 
 const SnackbarView = ({ isOpen, onRequestClose, children, className}) => {
@@ -23,6 +35,7 @@ const SnackbarView = ({ isOpen, onRequestClose, children, className}) => {
     <Snackbar style={{display: isOpen ? "flex" : "none"}}>
       <Content className={className}>
         {children}
+        <CloseButton onClick={onRequestClose}/>
       </Content>
     </Snackbar>
   );

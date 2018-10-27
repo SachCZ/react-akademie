@@ -26,11 +26,13 @@ class TransactionsContainer extends Component {
     displayNum: 25,
     displayNumBase: 25,
     redoSnackbarIsOpen: false,
-    deletedTransaction: {}
+    deletedTransaction: emptyModalTransaction,
+    nameError: "",
+    valueError: ""
   };
 
   resetModal = () => {
-    this.setState({modalTransaction: emptyModalTransaction});
+    this.setState({modalTransaction: emptyModalTransaction, nameError: "", valueError: ""});
   };
 
   openModalAddTransaction = () => {
@@ -48,6 +50,7 @@ class TransactionsContainer extends Component {
     const newTransaction = { ...transaction, type: type };
 
     this.setState({ modalTransaction: newTransaction });
+    this.validateModalTransaction(newTransaction, emptyModalTransaction);
     this.setState({ modalEditTransactionIsOpen: true });
     this.closeRedoSnackbar();
   };
@@ -119,6 +122,26 @@ class TransactionsContainer extends Component {
     });
   };
 
+  validateModalTransaction = (transaction, prevTransaction) => {
+    if(prevTransaction.value !== transaction.value) {
+      if (!transaction.value) {
+        this.setState({ valueError: "Musí být zadáno" });
+      } else if (!/^[-+]?[0-9]*\.?[0-9]+$/.test(transaction.value)) {
+        this.setState({ valueError: "Musí být číslo" });
+      } else {
+        this.setState({ valueError: "" });
+      }
+    }
+    if (prevTransaction.name !== transaction.name){
+      if (!transaction.name){
+        this.setState({nameError: "Musí být zadáno"});
+      }
+      else {
+        this.setState({nameError: ""});
+      }
+    }
+  };
+
   redoDeleteTransaction = () => {
     this.addTransaction(this.state.deletedTransaction);
     this.closeRedoSnackbar();
@@ -153,6 +176,7 @@ class TransactionsContainer extends Component {
           redoSnackbarIsOpen={this.state.redoSnackbarIsOpen}
           deletedTransaction={this.state.deletedTransaction}
           redoDeleteTransaction={this.redoDeleteTransaction}
+          onRedoSnackbarRequestClose={this.closeRedoSnackbar}
         />
         <TransactionModalContainer
           isOpen={this.state.modalAddTransactionIsOpen}
@@ -160,10 +184,13 @@ class TransactionsContainer extends Component {
           onSubmit={this.addTransaction}
           transaction={this.state.modalTransaction}
           onChange={(trans) => {
+            this.validateModalTransaction(trans, this.state.modalTransaction);
             this.setState({ modalTransaction: { ...trans } });
           }}
           buttonText="Přidat transakci"
           label="Nová transakce"
+          nameError={this.state.nameError}
+          valueError={this.state.valueError}
         />
         <TransactionModalContainer
           isOpen={this.state.modalEditTransactionIsOpen}
@@ -171,10 +198,13 @@ class TransactionsContainer extends Component {
           onSubmit={this.editTransaction}
           transaction={this.state.modalTransaction}
           onChange={(trans) => {
+            this.validateModalTransaction(trans, this.state.modalTransaction);
             this.setState({ modalTransaction: { ...trans } });
           }}
           buttonText="Uložit"
           label="Upravit transakci"
+          nameError={this.state.nameError}
+          valueError={this.state.valueError}
         />
       </Fragment>
     );
