@@ -7,9 +7,6 @@ import constants from "../Constants";
 import InlineSelectView from "./InlineSelectView";
 import { MdClose } from "react-icons/md";
 
-
-//TODO refactor this
-
 const modalAddTransactionCustomStyles = {
   overlay: {
     display: "flex",

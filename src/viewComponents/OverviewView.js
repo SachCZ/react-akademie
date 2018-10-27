@@ -4,8 +4,6 @@ import constants from "../Constants";
 import OverviewOptionsView from "./OverviewOptionsView";
 import WrappingLayout from "../layoutComponents/WrappingLayout";
 
-//TODO refactor this
-
 const Layout = styled.div`
   display: flex;
   justify-content: center;

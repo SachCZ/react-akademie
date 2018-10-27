@@ -7,10 +7,6 @@ import moment from "moment";
 import "moment/locale/cs";
 import BasePage from "./pages/BasePage";
 
-//TODO readme a aby to fungovalo, konzole čistá, errory hlavne npm install a npm start a server start
-//TODO when done remove todos :-D
-//TODO Refactor code and remove coments
-
 moment.locale('cs');
 
 Modal.setAppElement("#root");
