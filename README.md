@@ -1,44 +1,76 @@
-![React Akademie](logo-header.png)
+# Webwallet
 
-# Aplikace Peněženka
+> Application designed to track you financial data
 
-Aplikace slouží ke každodenní evidenci příjmů a výdajů. Lze sledovat celkovou bilanci účtu za určité období (den, měsíc, celkem).
+This web app was developed during the React academy course lead by Inventi development members.
+It relies on React and JSON-server. The purpose of this project is to develop a browser front-end aplication
+demonstrating the key capabilities of React taught in the mentioned academy.
 
-## Popis
-Aplikace obsahuje 2 různé obrazovky:
+## Install
 
-- Transakce
-- Přehledy
+### Using npm
 
-Obrazovka Transakce obsahuje seznam transakcí, řazený od nejnovější po nejstarší.
+To install dependencies on your machine using npm run:
 
-**Transakce** má následující hodnoty:
-- Typ (příjem, výdaj)
-- Název
-- Částka
-- Datum a čas vytvoření
+```
+    npm install
+```
 
-Transakce je možné filtrovat podle typu (příjem, výdaj, všechny).
+from the project root, where package.json resides.
 
-## Uživatelské scénáře
+### Using yarn
 
-### 1. Vytvořit transakci
-Uživatel může vytvořit novou transakci. Vyplní základní údaje, viz výše Transakce.
+To install dependencies on your machine using yarn simply run:
 
-### 2. Editovat transakci
-Uživatel může editovat existující transakci.
+```
+    yarn
+```
 
-### 3. Smazat transakci
-Uživatel může smazat existující transakci.
+from the project root, where package.json resides.
+## Usage
+This is the usage of the develeopment enviroment not the app itself.  
 
-### 4. Filtrovat transakce podle typu
-Uživatel může filtrovat transakce podle typu:
-- Příjmy
-- Výdaje
-- Vše
+First you need to get the server and app running on your machine.
+You can do that using yarn or npm by following the instructions bellow.
+Then you can simply make changes to the files in src directory and they will be
+reflected in real time to the app.
 
-### 5. Přepínat obrazovky
-Uživatel může přepínat mezi obrazovkou Transakce a Přehledy.
+### npm
 
-### 6. Zobrazovat přehledy 
-Uživatel může na obrazovce Přehledy zobrazit denní, měsíční a celkovou bilanci. U měsíční si může vybrat, za jaký měsíc se zobrazí.
+Open a terminal window, go to the project root where package.json resides and run:
+
+
+```
+    npm run server
+```
+
+This will initiate a json-server listening on port :3003 of localhost.
+That is the raw data will be available under: [http://localhost:3003](http://localhost:3003).
+
+Then open **another** terminal window go to the project root directory and run:
+
+```
+    npm run start
+```
+This will initiate the app listening on port :3000 of localhost.
+The app will then be available under [http://localhost:3000](http://localhost:3000).
+
+### yarn
+
+Open a terminal window, go to the project root where package.json resides and run:
+
+
+```
+    yarn run server
+```
+
+This will initiate a json-server listening on port :3003 of localhost.
+That is the raw data will be available under: [http://localhost:3003](http://localhost:3003).
+
+Then open **another** terminal window go to the project root directory and run:
+
+```
+    yarn run start
+```
+This will initiate the app listening on port :3000 of localhost.
+The app will then be available under [http://localhost:3000](http://localhost:3000).
