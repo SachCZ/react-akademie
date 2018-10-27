@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import OuterLayout from "../layoutComponents/OuterLayout";
 import constants from "../Constants";
-import MainImageSrc from "../images/main_image.jpg";
+import { withRouter } from "react-router-dom";
 
 const Bar = styled.div`
   display: flex;
@@ -18,33 +17,6 @@ const Bar = styled.div`
   z-index: -1;
 `;
 
-/*
-&:before {
-    background-color: ${constants.primaryColor};
-    content: "";
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -2;
-    opacity: 1;
-  }
-  @media (min-width: 800px) {
-    &:after {
-      content: "";
-      background: url(${MainImageSrc}) center;
-      opacity: 0.5;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      position: absolute;
-      z-index: -1;
-     }
-   }
- */
-
 const MainText = styled.span`
   font-family: LogoFont, sans-serif;
   font-size: 3.5vw;
@@ -54,12 +26,19 @@ const MainText = styled.span`
   color: white;
 `;
 
-const ImageBarView = ({text}) => {
+const ImageBarView = ({ location }) => {
   return (
     <Bar>
-      <MainText>{text}</MainText>
+      <MainText>
+        {
+          {
+            "/": "VŠECHNY TRANSAKCE",
+            "/Overview": "CELKOVÝ PŘEHLED"
+          }[location.pathname]
+        }
+      </MainText>
     </Bar>
   );
 };
 
-export default ImageBarView;
+export default withRouter(ImageBarView);

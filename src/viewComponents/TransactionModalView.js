@@ -3,8 +3,6 @@ import ButtonView from "./ButtonView";
 import Modal from "react-modal";
 import styled from "styled-components";
 import InputField from "./InputFieldView";
-import OuterLayout from "../layoutComponents/OuterLayout";
-import InnerLayout from "../layoutComponents/InnerLayout";
 import constants from "../Constants";
 import InlineSelectView from "./InlineSelectView";
 import { MdClose } from "react-icons/md";
@@ -16,7 +14,8 @@ const modalAddTransactionCustomStyles = {
   overlay: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    zIndex: "999"
   },
   content: {
     position: "static",
@@ -28,25 +27,6 @@ const modalAddTransactionCustomStyles = {
     alignItems: "stretch"
   }
 };
-
-const ModalWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex: 1;
-`;
-
-const ModalHeader = styled.h2`
-  text-align: center;
-  margin: 0;
-  ${constants.secondaryStyling};
-  display: flex;
-  justify-content: center;
-  padding: 5px;
-  position: relative;
-`;
-
-
 
 const Wrapper = styled.form`
   display: flex;
@@ -104,7 +84,7 @@ const SubmitButton = styled(ButtonView)`
 `;
 
 const TransactionModal = (props) => {
-  const { transaction, onSubmit, onChange, onTypeChange, buttonText, label, typeOptions, onRequestClose, valueError, nameError} = props;
+  const { transaction, onSubmit, onChange, onTypeChange, buttonText, label, typeOptions, onRequestClose, valueError, nameError } = props;
   const { name, value } = transaction;
 
   return (

@@ -5,6 +5,7 @@ import OverviewPage from "./OverviewPage";
 import TransactionsPage from "./TransactionsPage";
 import constants from "../Constants";
 import NavBarView from "../viewComponents/NavBarView";
+import ImageBarView from "../viewComponents/ImageBarView";
 
 const Layout = styled.div`
   width: 100%;
@@ -18,7 +19,8 @@ const Content = styled.div`
 const BasePage = () => {
   return (
     <Layout>
-      <NavBarView />
+      <NavBarView/>
+      <ImageBarView/>
       <Content>
         <Switch>
           <Route path="/Overview" component={OverviewPage}/>

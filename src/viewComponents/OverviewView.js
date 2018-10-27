@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import OuterLayout from "../layoutComponents/OuterLayout";
-import InnerLayout from "../layoutComponents/InnerLayout";
 import constants from "../Constants";
 import OverviewOptionsView from "./OverviewOptionsView";
-import InlineSelectView from "./InlineSelectView";
+import WrappingLayout from "../layoutComponents/WrappingLayout";
 
 //TODO refactor this
 
@@ -13,7 +11,7 @@ const Layout = styled.div`
   justify-content: center;
   width: 100%;
 `;
-const Container = styled(OuterLayout)`
+const Container = styled(WrappingLayout)`
   flex: 0 1 86%;
   @media (max-width: 800px){
     flex: 0 0 100%;
@@ -26,7 +24,7 @@ const Container = styled(OuterLayout)`
   padding-bottom: 100px;
 `;
 
-const Card = styled(InnerLayout)`
+const Card = styled.div`
   flex: 0 0 310px;
   height: 310px;
   ${constants.shadow}
@@ -70,7 +68,7 @@ const Options = styled(OverviewOptionsView)`
 const OverviewView = ({ day, dayTotal, month, monthTotal, total, typeOption, onTypeChange, typeOptions, monthOption, onMonthChange, monthOptions, reset }) => {
   return (
     <Layout>
-      <Container wrap="wrap" marginBetween={20}>
+      <Container spaceAround="20px">
         <Options typeOption={typeOption}
                  onTypeChange={onTypeChange}
                  typeOptions={typeOptions}
@@ -79,63 +77,63 @@ const OverviewView = ({ day, dayTotal, month, monthTotal, total, typeOption, onT
 
         />
         {monthOption.value === "empty" &&
-          <Card>
-            <Circle type={typeOption.value}>
-              {
-                typeOption.value === "all" &&
-                <DateDisplay>Celková bilance</DateDisplay>
-              }
-              {
-                typeOption.value === "income" &&
-                <DateDisplay>Celkové příjmy</DateDisplay>
-              }
-              {
-                typeOption.value === "expense" &&
-                <DateDisplay>Celkové výdaje</DateDisplay>
-              }
-              <CircleText>{total > 0 && "+" }{total} Kč</CircleText>
-            </Circle>
-          </Card>
+        <Card>
+          <Circle type={typeOption.value}>
+            {
+              typeOption.value === "all" &&
+              <DateDisplay>Celková bilance</DateDisplay>
+            }
+            {
+              typeOption.value === "income" &&
+              <DateDisplay>Celkové příjmy</DateDisplay>
+            }
+            {
+              typeOption.value === "expense" &&
+              <DateDisplay>Celkové výdaje</DateDisplay>
+            }
+            <CircleText>{total > 0 && "+"}{total} Kč</CircleText>
+          </Circle>
+        </Card>
         }
         {monthOption.value !== "empty" &&
-          <Card>
-            <Circle type={typeOption.value}>
-              {
-                typeOption.value === "all" &&
-                <DateDisplay>Celková bilance</DateDisplay>
-              }
-              {
-                typeOption.value === "income" &&
-                <DateDisplay>Příjmy za</DateDisplay>
-              }
-              {
-                typeOption.value === "expense" &&
-                <DateDisplay>Výdaje za</DateDisplay>
-              }
-              <DateDisplay>{month.format("MMMM YYYY")}</DateDisplay>
-              <CircleText>{monthTotal > 0 && "+" }{monthTotal} Kč</CircleText>
-            </Circle>
-          </Card>
+        <Card>
+          <Circle type={typeOption.value}>
+            {
+              typeOption.value === "all" &&
+              <DateDisplay>Celková bilance</DateDisplay>
+            }
+            {
+              typeOption.value === "income" &&
+              <DateDisplay>Příjmy za</DateDisplay>
+            }
+            {
+              typeOption.value === "expense" &&
+              <DateDisplay>Výdaje za</DateDisplay>
+            }
+            <DateDisplay>{month.format("MMMM YYYY")}</DateDisplay>
+            <CircleText>{monthTotal > 0 && "+"}{monthTotal} Kč</CircleText>
+          </Circle>
+        </Card>
         }
         {monthOption.value === "empty" &&
-          <Card>
-            <Circle type={typeOption.value}>
-              {
-                typeOption.value === "all" &&
-                <DateDisplay>Celková bilance dnes</DateDisplay>
-              }
-              {
-                typeOption.value === "income" &&
-                <DateDisplay>Příjmy dnes</DateDisplay>
-              }
-              {
-                typeOption.value === "expense" &&
-                <DateDisplay>Výdaje dnes</DateDisplay>
-              }
-              <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
-              <CircleText>{dayTotal > 0 && "+" }{dayTotal} Kč</CircleText>
-            </Circle>
-          </Card>
+        <Card>
+          <Circle type={typeOption.value}>
+            {
+              typeOption.value === "all" &&
+              <DateDisplay>Celková bilance dnes</DateDisplay>
+            }
+            {
+              typeOption.value === "income" &&
+              <DateDisplay>Příjmy dnes</DateDisplay>
+            }
+            {
+              typeOption.value === "expense" &&
+              <DateDisplay>Výdaje dnes</DateDisplay>
+            }
+            <DateDisplay>{day.format("DD. MM. YYYY")}</DateDisplay>
+            <CircleText>{dayTotal > 0 && "+"}{dayTotal} Kč</CircleText>
+          </Circle>
+        </Card>
         }
       </Container>
     </Layout>

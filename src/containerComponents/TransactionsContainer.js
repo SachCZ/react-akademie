@@ -2,14 +2,13 @@ import React, { Component, Fragment } from "react";
 import TransactionModalContainer from "./TransactionModalContainer";
 import moment from "moment";
 import TransactionsView from "../viewComponents/TransactionsView";
-import axios from '../util/axios';
+import axios from "../util/axios";
 import withTransactions from "../hoc/withTransactions";
-import SnackbarView from "../viewComponents/SnackbarView";
 
 const emptyModalTransaction = {
   name: "",
   value: "",
-  type: { value: 'income', label: 'Příjem' },
+  type: { value: "income", label: "Příjem" }
 };
 
 class TransactionsContainer extends Component {
@@ -32,7 +31,7 @@ class TransactionsContainer extends Component {
   };
 
   resetModal = () => {
-    this.setState({modalTransaction: emptyModalTransaction, nameError: "", valueError: ""});
+    this.setState({ modalTransaction: emptyModalTransaction, nameError: "", valueError: "" });
   };
 
   openModalAddTransaction = () => {
@@ -43,9 +42,11 @@ class TransactionsContainer extends Component {
   closeModalAddTransaction = () => (this.setState({ modalAddTransactionIsOpen: false }));
 
 
-
   openModalEditTransaction = (transaction) => {
-    const type = transaction.type === "income" ? { value: 'income', label: 'Příjem' } : { value: 'expense', label: 'Výdaj' };
+    const type = transaction.type === "income" ? { value: "income", label: "Příjem" } : {
+      value: "expense",
+      label: "Výdaj"
+    };
 
     const newTransaction = { ...transaction, type: type };
 
@@ -63,12 +64,12 @@ class TransactionsContainer extends Component {
   };
 
   handleLoadMore = () => {
-    this.setState(prevState => ({displayNum: prevState.displayNum + prevState.displayNumBase}));
+    this.setState(prevState => ({ displayNum: prevState.displayNum + prevState.displayNumBase }));
     this.closeRedoSnackbar();
   };
 
   resetDisplayNum = () => {
-    this.setState({displayNum: this.state.displayNumBase});
+    this.setState({ displayNum: this.state.displayNumBase });
   };
 
   addTransaction = (transaction) => {
@@ -77,33 +78,36 @@ class TransactionsContainer extends Component {
       value: transaction.value,
       type: transaction.type,
       created: transaction.created ? transaction.created : moment().valueOf(),
-      id: moment().valueOf(),
+      id: moment().valueOf()
     };
 
-    axios.post('/transactions', transactionCopy).then(response => {
+    axios.post("/transactions", transactionCopy).then(response => {
       this.props.reloadTransactions();
       this.setState((prevState) => ({
         modalTransaction: emptyModalTransaction,
-        filters: {...prevState.filters, type: transactionCopy.type === prevState.filters.type.value ? prevState.filters.type : this.props.typeOptions[0]}
+        filters: {
+          ...prevState.filters,
+          type: transactionCopy.type === prevState.filters.type.value ? prevState.filters.type : this.props.typeOptions[0]
+        }
       }), this.closeModalAddTransaction);
     });
   };
 
   deleteTransaction = (transaction) => {
-    const id= transaction.id;
+    const id = transaction.id;
     axios.delete("/transactions/" + id).then(response => {
       this.props.reloadTransactions();
-      this.setState({deletedTransaction: {...transaction}});
+      this.setState({ deletedTransaction: { ...transaction } });
       this.openRedoSnackbar();
     });
   };
 
   openRedoSnackbar = () => {
-    this.setState({redoSnackbarIsOpen: true});
+    this.setState({ redoSnackbarIsOpen: true });
   };
 
   closeRedoSnackbar = () => {
-    this.setState({redoSnackbarIsOpen: false});
+    this.setState({ redoSnackbarIsOpen: false });
   };
 
   editTransaction = (transaction) => {
@@ -115,7 +119,7 @@ class TransactionsContainer extends Component {
       id: transaction.id
     };
 
-    const id= transaction.id;
+    const id = transaction.id;
     axios.put("/transactions/" + id, editedTrans).then(response => {
       this.props.reloadTransactions();
       this.closeModalEditTransaction();
@@ -123,7 +127,7 @@ class TransactionsContainer extends Component {
   };
 
   validateModalTransaction = (transaction, prevTransaction) => {
-    if(prevTransaction.value !== transaction.value) {
+    if (prevTransaction.value !== transaction.value) {
       if (!transaction.value) {
         this.setState({ valueError: "Musí být zadáno" });
       } else if (!/^[-+]?[0-9]*\.?[0-9]+$/.test(transaction.value)) {
@@ -132,12 +136,12 @@ class TransactionsContainer extends Component {
         this.setState({ valueError: "" });
       }
     }
-    if (prevTransaction.name !== transaction.name){
-      if (!transaction.name){
-        this.setState({nameError: "Musí být zadáno"});
+    if (prevTransaction.name !== transaction.name) {
+      if (!transaction.name) {
+        this.setState({ nameError: "Musí být zadáno" });
       }
       else {
-        this.setState({nameError: ""});
+        this.setState({ nameError: "" });
       }
     }
   };
@@ -148,10 +152,9 @@ class TransactionsContainer extends Component {
   };
 
 
-
   render() {
     const { filters } = this.state;
-    const {transactions, focusTransaction, typeOptions} = this.props;
+    const { transactions, focusTransaction, typeOptions } = this.props;
 
     const filterOut = filters.type.value === "income" ? "expense" : (filters.type.value === "expense" ? "income" : "all");
     const filteredTransactions = transactions.filter(item => item.type !== filterOut);

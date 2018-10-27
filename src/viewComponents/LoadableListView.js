@@ -1,18 +1,27 @@
-import React from "react";
-import OuterLayout from "../layoutComponents/OuterLayout";
-import InnerLayout from "../layoutComponents/InnerLayout";
+import React, { Fragment } from "react";
 import ButtonView from "./ButtonView";
 import styled from "styled-components";
 import constants from "../Constants";
 import { MdFormatLineSpacing } from "react-icons/md";
 
-//TODO refactor this
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 120px;
+`;
 
-const Layout = styled(OuterLayout)`
+const Items = styled.div`
+  
+`;
 
+const LoadButton = styled(ButtonView)`
+  margin-top: 40px;
+  width: 200px;
+  align-self: center;
 `;
 
 const EndText = styled.span`
+  margin-top: 40px;
   width: 100%;
   text-align: center;
   color: ${constants.darkGrey}
@@ -26,26 +35,18 @@ const LoadIcon = styled(MdFormatLineSpacing)`
   margin-left: 5px;
 `;
 
-const LoadableListView = ({displayNum, onLoadMoreClicked, children, className}) => {
+const LoadableListView = ({ displayNum, onLoadMoreClicked, children, className }) => {
   const items = children.slice(0, displayNum);
 
   return (
-    <Layout className={className} direction="column" align="stretch" marginBetween={20} padding="0 0 110px 0">
-      <InnerLayout flex="0 0 auto">
-        <OuterLayout direction="column" align="stretch">
-          {items.map((item, index) => <InnerLayout key={index}>{item}</InnerLayout>)}
-        </OuterLayout>
-      </InnerLayout>
+    <Layout className={className}>
+      <Items>
+        {items.map((item, index) => <Fragment key={index}>{item}</Fragment>)}
+      </Items>
       {displayNum < children.length ?
-        <InnerLayout flex="0 0 auto">
-          <OuterLayout justify="center">
-            <InnerLayout flex="0 0 300px"><ButtonView onClick={onLoadMoreClicked}>Načíst další <LoadIcon/></ButtonView></InnerLayout>
-          </OuterLayout>
-        </InnerLayout>
+        <LoadButton onClick={onLoadMoreClicked}>Načíst další<LoadIcon/></LoadButton>
         :
-        <InnerLayout fley="0 0 auto">
-          <EndText>Žádné další transakce</EndText>
-        </InnerLayout>
+        <EndText>Žádné další transakce</EndText>
       }
     </Layout>
   );

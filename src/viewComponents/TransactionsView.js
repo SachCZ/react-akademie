@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import TransactionView from "./TransactionView";
 import styled from "styled-components";
 import constants from "../Constants";
-import BackgroundImageSrc from "../images/clouds.jpg";
 import SummaryView from "./SummaryView";
 import LoadableListView from "./LoadableListView";
 import SnackbarView from "./SnackbarView";
