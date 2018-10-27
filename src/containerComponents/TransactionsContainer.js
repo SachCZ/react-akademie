@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import TransactionModalContainer from "./TransactionModalContainer";
 import moment from "moment";
 import TransactionsView from "../viewComponents/TransactionsView";
-import axios from "../util/axios";
+import axios from "../utilities/axios";
 import withTransactions from "../hoc/withTransactions";
 
 const emptyModalTransaction = {

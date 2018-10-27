@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "../util/axios";
+import axios from "../utilities/axios";
 
 const WithTransactions = (WrappedComponent) => {
   class Wrapper extends Component {

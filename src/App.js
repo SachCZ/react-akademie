@@ -1,15 +1,14 @@
 import React from "react";
 import { injectGlobal } from "styled-components";
 import Modal from "react-modal";
-import LogoFontSrc from "./fonts/WorkSans-ExtraLight.ttf";
-import ButtonsFontSrc from "./fonts/WorkSans-Regular.ttf";
+import LogoFontSrc from "./resources/fonts/WorkSans-ExtraLight.ttf";
+import ButtonsFontSrc from "./resources/fonts/WorkSans-Regular.ttf";
 import moment from "moment";
 import "moment/locale/cs";
 import BasePage from "./pages/BasePage";
 
 //TODO readme a aby to fungovalo, konzole čistá, errory hlavne npm install a npm start a server start
 //TODO when done remove todos :-D
-//TODO resolve images (probably just delete the comments)
 //TODO Refactor code and remove coments
 
 moment.locale('cs');
