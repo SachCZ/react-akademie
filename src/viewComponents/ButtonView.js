@@ -21,6 +21,7 @@ const ButtonView = styled.button`
         return "10px";
       }
     }
+    ${({disabled}) => disabled && "opacity: 0.5; cursor: default"}
 `;
 
 export default ButtonView;

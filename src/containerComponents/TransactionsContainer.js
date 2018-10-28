@@ -73,6 +73,8 @@ class TransactionsContainer extends Component {
   };
 
   addTransaction = (transaction) => {
+    if (!this.validateModalTransaction(transaction, emptyModalTransaction)) return;
+
     const transactionCopy = {
       name: transaction.name,
       value: transaction.value,
@@ -129,19 +131,24 @@ class TransactionsContainer extends Component {
   validateModalTransaction = (transaction, prevTransaction) => {
     if (prevTransaction.value !== transaction.value) {
       if (!transaction.value) {
-        this.setState({ valueError: "Musí být zadáno" });
+        this.setState({ valueError: "Musí být zadáno"});
+        return false;
       } else if (!/^[-+]?[0-9]*\.?[0-9]+$/.test(transaction.value)) {
         this.setState({ valueError: "Musí být číslo" });
+        return false;
       } else {
-        this.setState({ valueError: "" });
+        this.setState({ valueError: ""  });
+        return true;
       }
     }
     if (prevTransaction.name !== transaction.name) {
       if (!transaction.name) {
         this.setState({ nameError: "Musí být zadáno" });
+        return false;
       }
       else {
         this.setState({ nameError: "" });
+        return true;
       }
     }
   };

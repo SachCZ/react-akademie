@@ -116,7 +116,7 @@ const TransactionModal = (props) => {
                placeholder={transaction.type.value === "income" ? "např. 25000" : "1400"}
                isValid={valueError === ""}
         />
-        <SubmitButton large type="submit">{buttonText}</SubmitButton>
+        <SubmitButton large type="submit" disabled={valueError || nameError || name==="" || value === ""}>{buttonText}</SubmitButton>
       </Wrapper>
     </Modal>
   );
